@@ -2,22 +2,22 @@
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>ابزارهای هوش مصنوعی برای معلمان</title>
+    <title>دستیار معلم هوش مصنوعی</title>
 
     <style>
         body {
             font-family: Tahoma, Arial;
-            background-color: #f5f5f5;
+            background: #f2f2f2;
             margin: 0;
             padding: 20px;
         }
 
-        .container {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
+        .box {
+            background: white;
             max-width: 800px;
             margin: auto;
+            padding: 20px;
+            border-radius: 10px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
 
@@ -26,51 +26,56 @@
         }
 
         button {
-            background-color: #3498db;
+            background: #27ae60;
             color: white;
             border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
+            padding: 12px 15px;
+            border-radius: 6px;
             cursor: pointer;
             margin-top: 10px;
         }
 
         button:hover {
-            background-color: #2980b9;
+            background: #1e8449;
+        }
+
+        .output {
+            margin-top: 15px;
+            padding: 10px;
+            background: #ecf9f1;
+            border-radius: 6px;
         }
     </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="box">
 
-    <h1>ابزارهای هوش مصنوعی برای معلمان</h1>
+    <h1>دستیار هوشمند معلم</h1>
 
-    <p>
-        این وب‌سایت برای کمک به معلمان عربی و هنر ساخته شده است.
-    </p>
+    <p>برای معلمان عربی و هنر - تولید ایده تدریس با یک کلیک</p>
 
-    <h2>قابلیت‌ها</h2>
-
-    <ul>
-        <li>ساخت سؤال امتحانی</li>
-        <li>ایده برای تدریس</li>
-        <li>طراحی فعالیت‌های کلاسی</li>
-    </ul>
-
-    <button onclick="showMessage()">
+    <button onclick="generateIdea()">
         تولید ایده تدریس
     </button>
 
-    <p id="output"></p>
+    <div class="output" id="result"></div>
 
 </div>
 
 <script>
-    function showMessage() {
-        document.getElementById("output").innerText =
-            "ایده: از دانش‌آموزان بخواه یک داستان کوتاه عربی درباره یک موضوع روز بنویسند.";
+    const ideas = [
+        "از دانش‌آموزان بخواه یک گفت‌وگوی کوتاه عربی درباره خرید در بازار بنویسند.",
+        "دانش‌آموزان یک پوستر هنری درباره موضوع 'صلح' طراحی کنند.",
+        "یک داستان کوتاه عربی با ۵ جمله ساده بنویسند.",
+        "در کلاس هنر، از دانش‌آموزان بخواه یک اثر با خطاطی اسم خودشان بسازند.",
+        "فعالیت گروهی: طراحی یک مکالمه عربی در رستوران."
+    ];
+
+    function generateIdea() {
+        let random = Math.floor(Math.random() * ideas.length);
+        document.getElementById("result").innerText = ideas[random];
     }
 </script>
 
