@@ -1,20 +1,78 @@
 <!DOCTYPE html>
-<html>
+<html lang="fa" dir="rtl">
 <head>
-    <title>AI Teacher Project</title>
+    <meta charset="UTF-8">
+    <title>ابزارهای هوش مصنوعی برای معلمان</title>
+
+    <style>
+        body {
+            font-family: Tahoma, Arial;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 800px;
+            margin: auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #2c3e50;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+    </style>
 </head>
+
 <body>
 
-    <h1>AI Tools for Teachers</h1>
+<div class="container">
 
-    <p>This website is designed for Arabic and Art teachers to use AI in class.</p>
+    <h1>ابزارهای هوش مصنوعی برای معلمان</h1>
 
-    <h2>What you can do:</h2>
+    <p>
+        این وب‌سایت برای کمک به معلمان عربی و هنر ساخته شده است.
+    </p>
+
+    <h2>قابلیت‌ها</h2>
+
     <ul>
-        <li>Create exam questions</li>
-        <li>Generate lesson ideas</li>
-        <li>Design classroom activities</li>
+        <li>ساخت سؤال امتحانی</li>
+        <li>ایده برای تدریس</li>
+        <li>طراحی فعالیت‌های کلاسی</li>
     </ul>
+
+    <button onclick="showMessage()">
+        تولید ایده تدریس
+    </button>
+
+    <p id="output"></p>
+
+</div>
+
+<script>
+    function showMessage() {
+        document.getElementById("output").innerText =
+            "ایده: از دانش‌آموزان بخواه یک داستان کوتاه عربی درباره یک موضوع روز بنویسند.";
+    }
+</script>
 
 </body>
 </html>
