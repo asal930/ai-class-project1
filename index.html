@@ -103,7 +103,9 @@ button:hover {
 ساخت پیشنهاد آموزشی
 </button>
 
-
+<button onclick="copyResult()">
+کپی نتیجه
+</button>
 <div class="result" id="result">
 نتیجه اینجا نمایش داده می‌شود.
 </div>
@@ -159,7 +161,15 @@ text =
 document.getElementById("result").innerText=text;
 
 }
+function copyResult(){
 
+let text = document.getElementById("result").innerText;
+
+navigator.clipboard.writeText(text);
+
+alert("نتیجه کپی شد ✅");
+
+}
 </script>
 
 
