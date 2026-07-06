@@ -1,101 +1,167 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
-    <meta charset="UTF-8">
-    <title>دستیار معلم هوش مصنوعی</title>
+<meta charset="UTF-8">
+<title>دستیار معلم هوشمند</title>
 
-    <style>
-        body {
-            font-family: Tahoma, Arial;
-            background: #f2f2f2;
-            margin: 0;
-            padding: 20px;
-        }
+<style>
+body {
+    font-family: Tahoma, Arial;
+    background: #f3f3f3;
+    padding: 20px;
+}
 
-        .box {
-            background: white;
-            max-width: 800px;
-            margin: auto;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
+.box {
+    background: white;
+    max-width: 700px;
+    margin: auto;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px #ccc;
+}
 
-        h1 {
-            color: #2c3e50;
-        }
+h1 {
+    color: #2c3e50;
+}
 
-        input {
-            width: 100%;
-            padding: 10px;
-            margin-top: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
+select, input, button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
 
-        button {
-            background: #2980b9;
-            color: white;
-            border: none;
-            padding: 12px 15px;
-            border-radius: 6px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
+button {
+    background: #2980b9;
+    color: white;
+    cursor: pointer;
+    border: none;
+}
 
-        button:hover {
-            background: #1f6390;
-        }
+button:hover {
+    background: #1f618d;
+}
 
-        .output {
-            margin-top: 15px;
-            padding: 10px;
-            background: #eaf6ff;
-            border-radius: 6px;
-        }
-    </style>
+.result {
+    margin-top: 20px;
+    padding: 15px;
+    background: #eef8ff;
+    border-radius: 8px;
+}
+</style>
+
 </head>
 
 <body>
 
 <div class="box">
 
-    <h1>دستیار هوشمند معلم</h1>
+<h1>🎓 دستیار معلم هوشمند</h1>
 
-    <p>موضوع درس را وارد کن تا ایده تدریس دریافت کنی</p>
+<p>
+ابزاری برای کمک به معلمان عربی و هنر
+</p>
 
-    <input type="text" id="topic" placeholder="مثلاً: اسم تفضیل / نقاشی طبیعت">
 
-    <button onclick="generateIdea()">
-        تولید ایده تدریس
-    </button>
+<label>انتخاب درس:</label>
 
-    <div class="output" id="result"></div>
+<select id="lesson">
+<option>عربی</option>
+<option>هنر</option>
+</select>
+
+
+<label>پایه دانش‌آموز:</label>
+
+<select id="grade">
+<option>هفتم</option>
+<option>هشتم</option>
+<option>نهم</option>
+</select>
+
+
+<label>موضوع درس:</label>
+
+<input id="topic" placeholder="مثلاً: اسم تفضیل یا نقاشی طبیعت">
+
+
+<label>نوع فعالیت:</label>
+
+<select id="type">
+
+<option>طرح درس</option>
+<option>سؤال امتحانی</option>
+<option>فعالیت گروهی</option>
+<option>ایده خلاقانه</option>
+
+</select>
+
+
+<button onclick="createIdea()">
+ساخت پیشنهاد آموزشی
+</button>
+
+
+<div class="result" id="result">
+نتیجه اینجا نمایش داده می‌شود.
+</div>
+
 
 </div>
 
+
 <script>
-    function generateIdea() {
-        let topic = document.getElementById("topic").value;
 
-        if (topic === "") {
-            document.getElementById("result").innerText = "لطفاً یک موضوع وارد کن.";
-            return;
-        }
+function createIdea(){
 
-        let ideas = [
-            `برای موضوع "${topic}" از دانش‌آموزان بخواه یک مثال واقعی در زندگی روزمره پیدا کنند.`,
-            `یک فعالیت گروهی طراحی کن که دانش‌آموزان درباره "${topic}" گفتگو کنند.`,
-            `از دانش‌آموزان بخواه یک پوستر یا نقاشی درباره "${topic}" بسازند.`,
-            `یک بازی کلاسی طراحی کن که مفهوم "${topic}" را آموزش دهد.`,
-            `دانش‌آموزان یک متن کوتاه درباره "${topic}" بنویسند.`
-        ];
+let lesson =
+document.getElementById("lesson").value;
 
-        let random = Math.floor(Math.random() * ideas.length);
+let grade =
+document.getElementById("grade").value;
 
-        document.getElementById("result").innerText = ideas[random];
-    }
+let topic =
+document.getElementById("topic").value;
+
+let type =
+document.getElementById("type").value;
+
+
+if(topic==""){
+document.getElementById("result").innerText =
+"لطفاً موضوع درس را وارد کنید.";
+return;
+}
+
+
+let text = "";
+
+
+if(lesson=="عربی"){
+
+text =
+`برای درس عربی پایه ${grade} درباره «${topic}» یک ${type} طراحی کن. 
+از مثال‌های ساده، فعالیت کلاسی و مشارکت دانش‌آموزان استفاده شود.`;
+
+}
+
+else {
+
+text =
+`برای درس هنر پایه ${grade} درباره «${topic}» یک ${type} طراحی کن.
+ایده باید خلاقانه و قابل اجرا در کلاس باشد.`;
+
+}
+
+
+document.getElementById("result").innerText=text;
+
+}
+
 </script>
+
 
 </body>
 </html>
