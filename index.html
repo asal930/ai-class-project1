@@ -25,8 +25,16 @@
             color: #2c3e50;
         }
 
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
         button {
-            background: #27ae60;
+            background: #2980b9;
             color: white;
             border: none;
             padding: 12px 15px;
@@ -36,13 +44,13 @@
         }
 
         button:hover {
-            background: #1e8449;
+            background: #1f6390;
         }
 
         .output {
             margin-top: 15px;
             padding: 10px;
-            background: #ecf9f1;
+            background: #eaf6ff;
             border-radius: 6px;
         }
     </style>
@@ -54,7 +62,9 @@
 
     <h1>دستیار هوشمند معلم</h1>
 
-    <p>برای معلمان عربی و هنر - تولید ایده تدریس با یک کلیک</p>
+    <p>موضوع درس را وارد کن تا ایده تدریس دریافت کنی</p>
+
+    <input type="text" id="topic" placeholder="مثلاً: اسم تفضیل / نقاشی طبیعت">
 
     <button onclick="generateIdea()">
         تولید ایده تدریس
@@ -65,16 +75,24 @@
 </div>
 
 <script>
-    const ideas = [
-        "از دانش‌آموزان بخواه یک گفت‌وگوی کوتاه عربی درباره خرید در بازار بنویسند.",
-        "دانش‌آموزان یک پوستر هنری درباره موضوع 'صلح' طراحی کنند.",
-        "یک داستان کوتاه عربی با ۵ جمله ساده بنویسند.",
-        "در کلاس هنر، از دانش‌آموزان بخواه یک اثر با خطاطی اسم خودشان بسازند.",
-        "فعالیت گروهی: طراحی یک مکالمه عربی در رستوران."
-    ];
-
     function generateIdea() {
+        let topic = document.getElementById("topic").value;
+
+        if (topic === "") {
+            document.getElementById("result").innerText = "لطفاً یک موضوع وارد کن.";
+            return;
+        }
+
+        let ideas = [
+            `برای موضوع "${topic}" از دانش‌آموزان بخواه یک مثال واقعی در زندگی روزمره پیدا کنند.`,
+            `یک فعالیت گروهی طراحی کن که دانش‌آموزان درباره "${topic}" گفتگو کنند.`,
+            `از دانش‌آموزان بخواه یک پوستر یا نقاشی درباره "${topic}" بسازند.`,
+            `یک بازی کلاسی طراحی کن که مفهوم "${topic}" را آموزش دهد.`,
+            `دانش‌آموزان یک متن کوتاه درباره "${topic}" بنویسند.`
+        ];
+
         let random = Math.floor(Math.random() * ideas.length);
+
         document.getElementById("result").innerText = ideas[random];
     }
 </script>
