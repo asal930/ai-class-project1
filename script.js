@@ -1,5 +1,5 @@
 console.log("معلم هوشمند با خانم عربصالحی");
-<script>
+
 
 function createIdea(){
 
@@ -55,4 +55,3 @@ navigator.clipboard.writeText(text);
 alert("نتیجه کپی شد ✅");
 
 }
-</script>
