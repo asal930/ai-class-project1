@@ -1,6 +1,5 @@
 console.log("معلم هوشمند با خانم عربصالحی");
 
-
 function createIdea(){
 
 let lesson =
