@@ -86,4 +86,4 @@ return;
 document.getElementById("savedIdeas").innerHTML +=
 "<hr><p>" + text + "</p>";
 
-alert("✅ ایده با موفقیت ذخیره شد.");
+alert("✅ ایده با موفقیت ذخیره شد.");}
