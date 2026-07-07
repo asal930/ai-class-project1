@@ -74,3 +74,18 @@ function copyResult() {
 
     alert("نتیجه کپی شد ✅");
 }
+function saveIdea(){
+
+let text = document.getElementById("result").innerText;
+
+if(text=="نتیجه اینجا نمایش داده می‌شود." || text==""){
+alert("ابتدا یک پیشنهاد آموزشی ایجاد کنید.");
+return;
+}
+
+document.getElementById("savedIdeas").innerHTML +=
+"<hr><p>" + text + "</p>";
+
+alert("✅ ایده با موفقیت ذخیره شد.");
+
+}
