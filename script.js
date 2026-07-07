@@ -1,7 +1,7 @@
 console.log("معلم هوشمند با خانم عربصالحی");
 
 function createIdea() {
-
+alert("تابع اجرا شد");
     let lesson = document.getElementById("lesson").value;
     let grade = document.getElementById("grade").value;
     let topic = document.getElementById("topic").value;
