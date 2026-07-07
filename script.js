@@ -1,34 +1,23 @@
 console.log("معلم هوشمند با خانم عربصالحی");
 
-function createIdea(){
+function createIdea() {
 
-let lesson =
-document.getElementById("lesson").value;
+    let lesson = document.getElementById("lesson").value;
+    let grade = document.getElementById("grade").value;
+    let topic = document.getElementById("topic").value;
+    let type = document.getElementById("type").value;
 
-let grade =
-document.getElementById("grade").value;
+    if (topic == "") {
+        document.getElementById("result").innerText =
+            "لطفاً موضوع درس را وارد کنید.";
+        return;
+    }
 
-let topic =
-document.getElementById("topic").value;
+    let text = "";
 
-let type =
-document.getElementById("type").value;
+    if (lesson == "عربی") {
 
-
-if(topic==""){
-document.getElementById("result").innerText =
-"لطفاً موضوع درس را وارد کنید.";
-return;
-}
-
-
-let text = "";
-  
-
-if(lesson=="عربی"){
-
-text =
-`📚 درس: عربی
+        text = `📚 درس: عربی
 🏫 پایه: ${grade}
 
 📖 موضوع: ${topic}
@@ -49,12 +38,9 @@ text =
 تکلیف:
 دانش‌آموزان سه مثال درباره «${topic}» بنویسند.`;
 
-}
+    } else {
 
-else{
-
-text =
-`🎨 درس: هنر
+        text = `🎨 درس: هنر
 🏫 پایه: ${grade}
 
 🖌 موضوع: ${topic}
@@ -75,20 +61,16 @@ text =
 تکلیف:
 یک اثر هنری مرتبط با «${topic}» طراحی و ارائه شود.`;
 
+    }
+
+    document.getElementById("result").innerText = text;
 }
 
-}
+function copyResult() {
 
+    let text = document.getElementById("result").innerText;
 
-document.getElementById("result").innerText=text;
+    navigator.clipboard.writeText(text);
 
-}
-function copyResult(){
-
-let text = document.getElementById("result").innerText;
-
-navigator.clipboard.writeText(text);
-
-alert("نتیجه کپی شد ✅");
-
+    alert("نتیجه کپی شد ✅");
 }
