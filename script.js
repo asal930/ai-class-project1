@@ -1,4 +1,3 @@
-alert("فایل script.js با موفقیت اجرا شد.");
 console.log("معلم هوشمند با خانم عربصالحی");
 
 function createIdea(){
