@@ -1,5 +1,6 @@
 console.log("معلم هوشمند با خانم عربصالحی");
 
+
 function createIdea() {
 
     let lesson = document.getElementById("lesson").value;
@@ -7,13 +8,16 @@ function createIdea() {
     let topic = document.getElementById("topic").value;
     let type = document.getElementById("type").value;
 
+
     if (topic == "") {
         document.getElementById("result").innerText =
             "لطفاً موضوع درس را وارد کنید.";
         return;
     }
 
+
     let text = "";
+
 
     if (lesson == "عربی") {
 
@@ -38,7 +42,9 @@ function createIdea() {
 تکلیف:
 دانش‌آموزان سه مثال درباره «${topic}» بنویسند.`;
 
-    } else {
+    } 
+    
+    else {
 
         text = `🎨 درس: هنر
 🏫 پایه: ${grade}
@@ -63,8 +69,12 @@ function createIdea() {
 
     }
 
+
     document.getElementById("result").innerText = text;
+
 }
+
+
 
 function copyResult() {
 
@@ -73,18 +83,59 @@ function copyResult() {
     navigator.clipboard.writeText(text);
 
     alert("نتیجه کپی شد ✅");
+
 }
+
+
+
 function saveIdea(){
 
-let text = document.getElementById("result").innerText;
+    let text = document.getElementById("result").innerText;
 
-if(text=="نتیجه اینجا نمایش داده می‌شود." || text==""){
-alert("ابتدا یک پیشنهاد آموزشی ایجاد کنید.");
-return;
+
+    if(text=="نتیجه اینجا نمایش داده می‌شود." || text==""){
+
+        alert("ابتدا یک پیشنهاد آموزشی ایجاد کنید.");
+
+        return;
+
+    }
+
+
+    let id = Date.now();
+
+
+    document.getElementById("savedIdeas").innerHTML +=
+
+    "<div class='idea-card' id='idea-" + id + "'>" +
+
+    "<h3>📚 ایده ذخیره شده</h3>" +
+
+    "<p>" + text + "</p>" +
+
+    "<button onclick=\"deleteIdea('idea-" + id + "')\">🗑 حذف ایده</button>" +
+
+    "</div>";
+
+
+    alert("✅ ایده با موفقیت ذخیره شد.");
+
 }
 
-document.getElementById("savedIdeas").innerHTML +=
-"<div class='idea-card'><h3>📚 ایده ذخیره شده</h3><p>" 
-+ text + 
-"</p></div>";
-alert("✅ ایده با موفقیت ذخیره شد.");}
+
+
+function deleteIdea(id){
+
+    let idea = document.getElementById(id);
+
+
+    if(idea){
+
+        idea.remove();
+
+    }
+
+
+    alert("ایده حذف شد ✅");
+
+}
