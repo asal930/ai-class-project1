@@ -84,6 +84,7 @@ return;
 }
 
 document.getElementById("savedIdeas").innerHTML +=
-"<hr><p>" + text + "</p>";
-
+"<div class='idea-card'><h3>📚 ایده ذخیره شده</h3><p>" 
++ text + 
+"</p></div>";
 alert("✅ ایده با موفقیت ذخیره شد.");}
