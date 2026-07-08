@@ -120,6 +120,7 @@ function saveIdea(){
 
     alert("✅ ایده با موفقیت ذخیره شد.");
 
+    saveToLocal();
 }
 
 
@@ -137,5 +138,12 @@ function deleteIdea(id){
 
 
     alert("ایده حذف شد ✅");
+
+}
+function saveToLocal(){
+
+let ideas = document.getElementById("savedIdeas").innerHTML;
+
+localStorage.setItem("ideas", ideas);
 
 }
