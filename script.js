@@ -135,7 +135,17 @@ function deleteIdea(id){
         idea.remove();
 
     }
+window.onload = function(){
 
+let ideas = localStorage.getItem("ideas");
+
+if(ideas){
+
+document.getElementById("savedIdeas").innerHTML = ideas;
+
+}
+
+}
 
     alert("ایده حذف شد ✅");
 
