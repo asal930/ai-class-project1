@@ -137,3 +137,19 @@ window.onload = function () {
     }
 
 };
+
+function clearIdeas(){
+
+    let ok = confirm("آیا مطمئن هستید که همه ایده‌ها حذف شوند؟");
+
+    if(!ok){
+        return;
+    }
+
+    document.getElementById("savedIdeas").innerHTML = "";
+
+    localStorage.removeItem("ideas");
+
+    alert("همه ایده‌ها حذف شدند ✅");
+
+}
