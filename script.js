@@ -1,6 +1,5 @@
 console.log("معلم هوشمند با خانم عربصالحی");
 
-
 function createIdea() {
 
     let lesson = document.getElementById("lesson").value;
@@ -8,16 +7,13 @@ function createIdea() {
     let topic = document.getElementById("topic").value;
     let type = document.getElementById("type").value;
 
-
     if (topic == "") {
         document.getElementById("result").innerText =
-            "لطفاً موضوع درس را وارد کنید.";
+        "لطفاً موضوع درس را وارد کنید.";
         return;
     }
 
-
     let text = "";
-
 
     if (lesson == "عربی") {
 
@@ -42,9 +38,7 @@ function createIdea() {
 تکلیف:
 دانش‌آموزان سه مثال درباره «${topic}» بنویسند.`;
 
-    } 
-    
-    else {
+    } else {
 
         text = `🎨 درس: هنر
 🏫 پایه: ${grade}
@@ -69,11 +63,8 @@ function createIdea() {
 
     }
 
-
     document.getElementById("result").innerText = text;
-
 }
-
 
 
 function copyResult() {
@@ -83,77 +74,66 @@ function copyResult() {
     navigator.clipboard.writeText(text);
 
     alert("نتیجه کپی شد ✅");
-
 }
 
 
-
-function saveIdea(){
+function saveIdea() {
 
     let text = document.getElementById("result").innerText;
 
-
-    if(text=="نتیجه اینجا نمایش داده می‌شود." || text==""){
-
+    if (text == "نتیجه اینجا نمایش داده می‌شود." || text == "") {
         alert("ابتدا یک پیشنهاد آموزشی ایجاد کنید.");
-
         return;
-
     }
-
 
     let id = Date.now();
 
-
     document.getElementById("savedIdeas").innerHTML +=
-
     "<div class='idea-card' id='idea-" + id + "'>" +
-
     "<h3>📚 ایده ذخیره شده</h3>" +
-
     "<p>" + text + "</p>" +
-
     "<button onclick=\"deleteIdea('idea-" + id + "')\">🗑 حذف ایده</button>" +
-
     "</div>";
 
+    saveToLocal();
 
     alert("✅ ایده با موفقیت ذخیره شد.");
 
-    saveToLocal();
 }
 
 
-
-function deleteIdea(id){
+function deleteIdea(id) {
 
     let idea = document.getElementById(id);
 
-
-    if(idea){
-
+    if (idea) {
         idea.remove();
-
     }
-window.onload = function(){
 
-let ideas = localStorage.getItem("ideas");
-
-if(ideas){
-
-document.getElementById("savedIdeas").innerHTML = ideas;
-
-}
-
-}
+    saveToLocal();
 
     alert("ایده حذف شد ✅");
 
 }
-function saveToLocal(){
 
-let ideas = document.getElementById("savedIdeas").innerHTML;
 
-localStorage.setItem("ideas", ideas);
+function saveToLocal() {
+
+    let ideas = document.getElementById("savedIdeas").innerHTML;
+
+    localStorage.setItem("ideas", ideas);
 
 }
+
+
+window.onload = function () {
+
+    let ideas = localStorage.getItem("ideas");
+
+    if (ideas) {
+
+        document.getElementById("savedIdeas").innerHTML = ideas;
+
+    }
+
+};
