@@ -93,7 +93,7 @@ let date = now.toLocaleString("fa-IR");
     alert(date);
     document.getElementById("savedIdeas").innerHTML +=
     "<div class='idea-card' id='idea-" + id + "'>" +
-    "<h3>📚 ایده ذخیره شده</h3>" +
+    "<h3>📚 ایده ذخیره شده - نسخه جدید</h3>" +
 "<small>🗓️ " + date + "</small>" +
 "<p>" + text + "</p>" +
     "<button onclick=\"deleteIdea('idea-" + id + "')\">🗑 حذف ایده</button>" +
