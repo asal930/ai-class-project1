@@ -87,7 +87,9 @@ function saveIdea() {
     }
 
     let id = Date.now();
+let now = new Date();
 
+let date = now.toLocaleString("fa-IR");
     document.getElementById("savedIdeas").innerHTML +=
     "<div class='idea-card' id='idea-" + id + "'>" +
     "<h3>📚 ایده ذخیره شده</h3>" +
