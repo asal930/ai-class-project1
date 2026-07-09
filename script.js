@@ -96,8 +96,8 @@ let date = now.toLocaleString("fa-IR");
     "<h3>📚 ایده ذخیره شده - نسخه جدید</h3>" +
 "<small>🗓️ " + date + "</small>" +
 "<p>" + text + "</p>" +
-    "<button onclick=\"deleteIdea('idea-" + id + "')\">🗑 حذف ایده</button>" +
-    "</div>";
+    "<button onclick=\"editIdea('idea-" + id + "')\">✏️ ویرایش</button>" +
+"<button onclick=\"deleteIdea('idea-" + id + "')\">🗑 حذف ایده</button>" +
 
     saveToLocal();
 
