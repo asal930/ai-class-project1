@@ -155,7 +155,25 @@ function clearIdeas(){
     localStorage.removeItem("ideas");
 
     alert("همه ایده‌ها حذف شدند ✅");
+function editIdea(id){
 
+    let idea = document.getElementById(id);
+
+    let p = idea.querySelector("p");
+
+    let newText = prompt("متن جدید ایده را وارد کنید:", p.innerText);
+
+    if(newText == null || newText == ""){
+        return;
+    }
+
+    p.innerText = newText;
+
+    saveToLocal();
+
+    alert("✅ ایده ویرایش شد.");
+
+}
 }
 function searchIdeas(){
 
