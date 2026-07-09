@@ -66,7 +66,6 @@ function createIdea() {
     document.getElementById("result").innerText = text;
 }
 
-
 function copyResult() {
 
     let text = document.getElementById("result").innerText;
@@ -75,7 +74,6 @@ function copyResult() {
 
     alert("نتیجه کپی شد ✅");
 }
-
 
 function saveIdea() {
 
@@ -87,60 +85,71 @@ function saveIdea() {
     }
 
     let id = Date.now();
-let now = new Date();
 
-let date = now.toLocaleString("fa-IR");
-    alert(date);
+    let date = new Date().toLocaleString("fa-IR");
+
     document.getElementById("savedIdeas").innerHTML +=
-    "<div class='idea-card' id='idea-" + id + "'>" +
-    "<h3>📚 ایده ذخیره شده - نسخه جدید</h3>" +
-"<small>🗓️ " + date + "</small>" +
-"<p>" + text + "</p>" +
-    "<button onclick=\"editIdea('idea-" + id + "')\">✏️ ویرایش</button>" +
-"<button onclick=\"deleteIdea('idea-" + id + "')\">🗑 حذف ایده</button>" +
+        "<div class='idea-card' id='idea-" + id + "'>" +
+        "<h3>📚 ایده ذخیره شده</h3>" +
+        "<small>🗓️ " + date + "</small>" +
+        "<p>" + text + "</p>" +
+        "<button onclick=\"editIdea('idea-" + id + "')\">✏️ ویرایش</button> " +
+        "<button onclick=\"deleteIdea('idea-" + id + "')\">🗑 حذف ایده</button>" +
+        "</div>";
 
     saveToLocal();
 
     alert("✅ ایده با موفقیت ذخیره شد.");
-
 }
 
-
-function deleteIdea(id) {
+function editIdea(id){
 
     let idea = document.getElementById(id);
 
-    if (idea) {
+    let p = idea.querySelector("p");
+
+    let newText = prompt("متن جدید ایده را وارد کنید:", p.innerText);
+
+    if(newText == null || newText.trim() == ""){
+        return;
+    }
+
+    p.innerText = newText;
+
+    saveToLocal();
+
+    alert("✅ ایده ویرایش شد.");
+}
+
+function deleteIdea(id){
+
+    let idea = document.getElementById(id);
+
+    if(idea){
         idea.remove();
     }
 
     saveToLocal();
 
     alert("ایده حذف شد ✅");
-
 }
 
-
-function saveToLocal() {
+function saveToLocal(){
 
     let ideas = document.getElementById("savedIdeas").innerHTML;
 
     localStorage.setItem("ideas", ideas);
-
 }
 
-
-window.onload = function () {
+window.onload = function(){
 
     let ideas = localStorage.getItem("ideas");
 
-    if (ideas) {
-
+    if(ideas){
         document.getElementById("savedIdeas").innerHTML = ideas;
-
     }
 
-};
+}
 
 function clearIdeas(){
 
@@ -155,24 +164,6 @@ function clearIdeas(){
     localStorage.removeItem("ideas");
 
     alert("همه ایده‌ها حذف شدند ✅");
-function editIdea(id){
-
-    let idea = document.getElementById(id);
-
-    let p = idea.querySelector("p");
-
-    let newText = prompt("متن جدید ایده را وارد کنید:", p.innerText);
-
-    if(newText == null || newText == ""){
-        return;
-    }
-
-    p.innerText = newText;
-
-    saveToLocal();
-
-    alert("✅ ایده ویرایش شد.");
-
 }
 
 function searchIdeas(){
@@ -180,7 +171,7 @@ function searchIdeas(){
     let input = document.getElementById("search").value.toLowerCase();
 
     let cards = document.getElementsByClassName("idea-card");
-alert("تعداد کارت‌ها: " + cards.length);
+
     for(let i = 0; i < cards.length; i++){
 
         let text = cards[i].innerText.toLowerCase();
