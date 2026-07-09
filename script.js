@@ -162,7 +162,7 @@ alert("جستجو اجرا شد");
     let input = document.getElementById("search").value.toLowerCase();
 
     let cards = document.getElementsByClassName("idea-card");
-
+alert("تعداد کارت‌ها: " + cards.length);
     for(let i = 0; i < cards.length; i++){
 
         let text = cards[i].innerText.toLowerCase();
