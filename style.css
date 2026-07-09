@@ -101,3 +101,29 @@ button:hover {
     margin-bottom: 10px;
 
 }
+.idea-card button{
+
+    background: #e53935;
+
+    color: white;
+
+    border: none;
+
+    padding: 10px 16px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    margin-top: 12px;
+
+    transition: 0.3s;
+
+}
+.idea-card button:hover{
+
+    background: #c62828;
+
+    transform: scale(1.05);
+
+}
