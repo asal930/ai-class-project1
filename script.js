@@ -190,3 +190,24 @@ function searchIdeas(){
     }
 
 }
+function favoriteIdea(id){
+
+    let idea = document.getElementById(id);
+
+    if(idea.classList.contains("favorite")){
+
+        idea.classList.remove("favorite");
+
+        alert("⭐ از حالت مهم خارج شد");
+
+    }else{
+
+        idea.classList.add("favorite");
+
+        alert("⭐ ایده مهم شد");
+
+    }
+
+    saveToLocal();
+
+}
