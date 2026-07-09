@@ -76,3 +76,28 @@ button:hover {
     transition: 0.3s;
 
 }
+.idea-card:hover{
+
+    transform: translateY(-3px);
+
+    box-shadow: 0 8px 18px rgba(0,0,0,0.20);
+
+}
+
+.idea-card h3{
+
+    color: #2e7d32;
+
+    margin-top: 0;
+
+}
+
+.idea-card small{
+
+    color: gray;
+
+    display: block;
+
+    margin-bottom: 10px;
+
+}
