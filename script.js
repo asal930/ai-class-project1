@@ -87,9 +87,9 @@ function saveIdea() {
     let id = Date.now();
 
     let date = new Date().toLocaleString("fa-IR");
-
+let cardClass = text.includes("📚 درس: عربی") ? "arabic-card" : "art-card";
     document.getElementById("savedIdeas").innerHTML +=
-        "<div class='idea-card' id='idea-" + id + "'>" +
+        "<div class='idea-card " + cardClass + "' id='idea-" + id + "'>" +
         "<h3>📚 ایده ذخیره شده</h3>" +
         "<small>🗓️ " + date + "</small>" +
         "<p>" + text + "</p>" +
