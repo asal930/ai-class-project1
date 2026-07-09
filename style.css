@@ -2,18 +2,7 @@ body{
     font-family:Tahoma;
 }
 
-.idea-card {
-    background: white;
-    padding: 15px;
-    margin-top: 15px;
-    border-radius: 10px;
-    border: 1px solid #ddd;
-    line-height: 2;
-}
 
-.idea-card h3 {
-    margin-top: 0;
-}
 .idea-card{
 
     background: #ffffff;
