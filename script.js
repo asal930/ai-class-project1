@@ -157,3 +157,26 @@ function clearIdeas(){
     alert("همه ایده‌ها حذف شدند ✅");
 
 }
+function searchIdeas(){
+
+    let input = document.getElementById("search").value.toLowerCase();
+
+    let cards = document.getElementsByClassName("idea-card");
+
+    for(let i = 0; i < cards.length; i++){
+
+        let text = cards[i].innerText.toLowerCase();
+
+        if(text.indexOf(input) > -1){
+
+            cards[i].style.display = "block";
+
+        }else{
+
+            cards[i].style.display = "none";
+
+        }
+
+    }
+
+}
