@@ -158,7 +158,7 @@ function clearIdeas(){
 
 }
 function searchIdeas(){
-
+alert("جستجو اجرا شد");
     let input = document.getElementById("search").value.toLowerCase();
 
     let cards = document.getElementsByClassName("idea-card");
