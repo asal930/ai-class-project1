@@ -203,3 +203,20 @@ button:hover{
     font-weight:bold;
 
 }
+.welcome{
+
+    background:#fff8e1;
+
+    border-right:6px solid #f39c12;
+
+    padding:18px;
+
+    border-radius:12px;
+
+    line-height:2;
+
+    margin-bottom:25px;
+
+    box-shadow:0 3px 8px rgba(0,0,0,.08);
+
+}
