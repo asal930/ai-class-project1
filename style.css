@@ -146,3 +146,60 @@ button:hover{
     transform: scale(1.05);
 
 }
+/* ===== نسخه 2.0 ===== */
+
+.header{
+
+    background: linear-gradient(135deg,#2980b9,#27ae60);
+
+    color:white;
+
+    text-align:center;
+
+    padding:25px;
+
+    border-radius:15px;
+
+    margin-bottom:20px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.2);
+
+}
+
+.header h1{
+
+    margin:0;
+
+    font-size:34px;
+
+    color:white;
+
+}
+
+.header h3{
+
+    margin-top:10px;
+
+    font-weight:normal;
+
+    color:#ecf0f1;
+
+}
+
+.version{
+
+    display:inline-block;
+
+    margin-top:15px;
+
+    background:white;
+
+    color:#2980b9;
+
+    padding:6px 15px;
+
+    border-radius:30px;
+
+    font-weight:bold;
+
+}
