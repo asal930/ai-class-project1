@@ -174,7 +174,7 @@ function editIdea(id){
     alert("✅ ایده ویرایش شد.");
 
 }
-}
+
 function searchIdeas(){
 
     let input = document.getElementById("search").value.toLowerCase();
