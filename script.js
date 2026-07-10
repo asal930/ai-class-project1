@@ -97,7 +97,7 @@ let cardClass = text.includes("📚 درس: عربی") ? "arabic-card" : "art-ca
 "<button onclick=\"favoriteIdea('idea-" + id + "')\">⭐ مهم</button> " +
 "<button onclick=\"deleteIdea('idea-" + id + "')\">🗑 حذف ایده</button>" +
         "</div>";
-
+updateStats();
     saveToLocal();
 
     alert("✅ ایده با موفقیت ذخیره شد.");
@@ -134,7 +134,7 @@ function deleteIdea(id){
 
     alert("ایده حذف شد ✅");
 }
-
+updateStats();
 function saveToLocal(){
 
     let ideas = document.getElementById("savedIdeas").innerHTML;
@@ -151,6 +151,7 @@ window.onload = function(){
     }
 
 }
+updateStats();
 
 function clearIdeas(){
 
@@ -207,6 +208,7 @@ function favoriteIdea(id){
         alert("⭐ ایده مهم شد");
 
     }
+    updateStats();
 
     saveToLocal();
 
