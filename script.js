@@ -211,3 +211,14 @@ function favoriteIdea(id){
     saveToLocal();
 
 }
+function updateStats(){
+
+    let ideas = document.getElementsByClassName("idea-card").length;
+
+    let favorites = document.getElementsByClassName("favorite").length;
+
+    document.getElementById("stats").innerHTML =
+    "📊 تعداد ایده‌ها: " + ideas +
+    " | ⭐ ایده‌های مهم: " + favorites;
+
+}
