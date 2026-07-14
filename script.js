@@ -244,5 +244,11 @@ function downloadPDF(){
 
 }
 function downloadPDF() {
-    alert("دکمه PDF وصل است ✅");
+
+    if (!window.jspdf) {
+        alert("❌ کتابخانه jsPDF لود نشده است");
+        return;
+    }
+
+    alert("✅ jsPDF آماده است");
 }
