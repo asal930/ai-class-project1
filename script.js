@@ -243,3 +243,5 @@ function downloadPDF(){
     doc.save("idea.pdf");
 
 }
+
+}
