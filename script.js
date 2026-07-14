@@ -243,12 +243,3 @@ function downloadPDF(){
     doc.save("idea.pdf");
 
 }
-function downloadPDF() {
-
-    if (!window.jspdf) {
-        alert("❌ کتابخانه jsPDF لود نشده است");
-        return;
-    }
-
-    alert("✅ jsPDF آماده است");
-}
