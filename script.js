@@ -243,3 +243,6 @@ function downloadPDF(){
     doc.save("idea.pdf");
 
 }
+function downloadPDF() {
+    alert("دکمه PDF وصل است ✅");
+}
