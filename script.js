@@ -224,3 +224,22 @@ function updateStats(){
     " | ⭐ ایده‌های مهم: " + favorites;
 
 }
+
+function downloadPDF(){
+
+    const { jsPDF } = window.jspdf;
+
+    const doc = new jsPDF();
+
+    let text = document.getElementById("result").innerText;
+
+    doc.setFont("helvetica");
+    doc.setFontSize(12);
+
+    let lines = doc.splitTextToSize(text,170);
+
+    doc.text(lines,20,20);
+
+    doc.save("idea.pdf");
+
+}
