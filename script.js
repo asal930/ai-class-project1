@@ -278,5 +278,48 @@ async function downloadWord() {
     link.click();
 }
 function printIdea() {
-    alert("دکمه چاپ وصل است ✅");
+
+    let text = document.getElementById("result").innerText;
+
+    if (text == "" || text == "نتیجه اینجا نمایش داده می‌شود.") {
+        alert("ابتدا یک پیشنهاد آموزشی ایجاد کنید.");
+        return;
+    }
+
+    let win = window.open("", "_blank");
+
+    win.document.write(`
+    <html lang="fa" dir="rtl">
+    <head>
+    <title>چاپ ایده آموزشی</title>
+
+    <style>
+    body{
+        font-family:tahoma;
+        direction:rtl;
+        padding:30px;
+        line-height:2;
+    }
+    </style>
+
+    </head>
+
+    <body>
+
+    <h2>🎓 معلم هوشمند</h2>
+
+    <hr>
+
+    <p>${text.replace(/\n/g,"<br>")}</p>
+
+    </body>
+    </html>
+    `);
+
+    win.document.close();
+
+    setTimeout(function(){
+        win.print();
+    },500);
+
 }
