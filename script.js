@@ -278,50 +278,5 @@ async function downloadWord() {
     link.click();
 }
 function printIdea() {
-
-    let text = document.getElementById("result").innerHTML;
-
-    if (
-        text == "" ||
-        text == "نتیجه اینجا نمایش داده می‌شود."
-    ) {
-        alert("ابتدا یک پیشنهاد آموزشی ایجاد کنید.");
-        return;
-    }
-
-    let win = window.open("", "_blank");
-
-    win.document.write(`
-        <html dir="rtl">
-        <head>
-            <title>چاپ ایده آموزشی</title>
-            <style>
-                body{
-                    font-family:tahoma;
-                    direction:rtl;
-                    padding:30px;
-                    line-height:2;
-                }
-                h2{
-                    text-align:center;
-                }
-            </style>
-        </head>
-        <body>
-
-        <h2>🎓 معلم هوشمند</h2>
-
-        <hr>
-
-        <div>${text.replace(/\n/g,"<br>")}</div>
-
-        </body>
-        </html>
-    `);
-
-    win.document.close();
-
-    win.print();
-
+    alert("دکمه چاپ وصل است ✅");
 }
-
