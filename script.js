@@ -323,3 +323,50 @@ function printIdea() {
     },500);
 
 }
+function filterIdeas(){
+
+    let filter = document.getElementById("filterIdeas").value;
+
+    let cards = document.getElementsByClassName("idea-card");
+
+    for(let i = 0; i < cards.length; i++){
+
+        if(filter == "all"){
+
+            cards[i].style.display = "block";
+
+        }
+
+        else if(filter == "arabic"){
+
+            if(cards[i].classList.contains("arabic-card")){
+                cards[i].style.display = "block";
+            }else{
+                cards[i].style.display = "none";
+            }
+
+        }
+
+        else if(filter == "art"){
+
+            if(cards[i].classList.contains("art-card")){
+                cards[i].style.display = "block";
+            }else{
+                cards[i].style.display = "none";
+            }
+
+        }
+
+        else if(filter == "favorite"){
+
+            if(cards[i].classList.contains("favorite")){
+                cards[i].style.display = "block";
+            }else{
+                cards[i].style.display = "none";
+            }
+
+        }
+
+    }
+
+}
