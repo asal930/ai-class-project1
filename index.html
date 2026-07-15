@@ -112,6 +112,14 @@
     <div id="stats" class="stats">
 📊 تعداد ایده‌ها: 0 | ⭐ ایده‌های مهم: 0
 </div>
+    <label>📂 نمایش ایده‌ها:</label>
+
+<select id="filterIdeas" onchange="filterIdeas()">
+    <option value="all">همه ایده‌ها</option>
+    <option value="arabic">📚 عربی</option>
+    <option value="art">🎨 هنر</option>
+    <option value="favorite">⭐ ایده‌های مهم</option>
+</select>
 <h2>📚 ایده‌های ذخیره شده</h2>
 <div class="result" id="savedIdeas">
 </div>
