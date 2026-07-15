@@ -243,5 +243,39 @@ function downloadPDF(){
     doc.save("idea.pdf");
 
 }
+async function downloadWord() {
+
+    const { Document, Paragraph, Packer } = docx;
+
+    let text = document.getElementById("result").innerText;
+
+    if (text == "" || text == "نتیجه اینجا نمایش داده می‌شود.") {
+        alert("ابتدا یک پیشنهاد آموزشی ایجاد کنید.");
+        return;
+    }
+
+    const doc = new Document({
+        sections: [
+            {
+                properties: {},
+                children: [
+                    new Paragraph({
+                        text: text
+                    })
+                ]
+            }
+        ]
+    });
+
+    const blob = await Packer.toBlob(doc);
+
+    const link = document.createElement("a");
+
+    link.href = URL.createObjectURL(blob);
+
+    link.download = "idea.docx";
+
+    link.click();
+}
 
 
