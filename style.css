@@ -263,3 +263,29 @@ button:hover{
     font-size:18px;
 
 }
+.main-menu{
+    background:#2c3e50;
+    padding:15px;
+    text-align:center;
+}
+
+.main-menu a{
+
+    color:white;
+
+    text-decoration:none;
+
+    margin:12px;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    transition:0.3s;
+}
+
+.main-menu a:hover{
+
+    color:#ffd54f;
+
+}
