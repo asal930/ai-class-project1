@@ -387,13 +387,23 @@ else{
 }
 
 }
-        function showMeaning(text){
+        function showMeaning(word, meaning){
 
-let x = document.getElementById("meaning");
+let old = document.querySelector(".meaning-box");
 
-x.innerHTML = "📖 " + text;
+if(old){
+    old.remove();
+}
 
-        }
+let box = document.createElement("span");
+
+box.className = "meaning-box";
+
+box.innerHTML = "📖 " + meaning;
+
+word.appendChild(box);
+
+}
 </script>
 
 </body>
