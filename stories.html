@@ -310,10 +310,22 @@ else{
 
 }
 
-
 function showTranslation(){
 
 let x = document.getElementById("translation");
+
+if(x.style.display === "none"){
+    x.style.display = "block";
+}
+else{
+    x.style.display = "none";
+}
+
+}
+
+function showWords(){
+
+let x = document.getElementById("words");
 
 if(x.style.display === "none"){
     x.style.display = "block";
@@ -328,7 +340,3 @@ else{
 
 </body>
 </html>
-
-
-
-
