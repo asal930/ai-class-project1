@@ -251,6 +251,11 @@ style="width:100%;max-width:700px;border-radius:15px;margin-bottom:20px;">
 <hr>
 
 <h2>❓ سؤال‌های داستان</h2>
+<h2>❓ سؤال‌های داستان</h2>
+
+<button onclick="showQuestions()">❓ نمایش سؤال‌ها</button>
+
+<div id="questions" style="display:none;">
 
 <ol>
 
@@ -273,6 +278,8 @@ style="width:100%;max-width:700px;border-radius:15px;margin-bottom:20px;">
 <li>اگر جای پیرزن بودی چه کار می‌کردی؟</li>
 
 </ol>
+
+</div>
 <p>
 
 این بخش به اولین داستان آموزشی اختصاص دارد.
@@ -338,7 +345,19 @@ else{
 }
 
         }
+        
+function showQuestions(){
 
+let x = document.getElementById("questions");
+
+if(x.style.display === "none"){
+    x.style.display = "block";
+}
+else{
+    x.style.display = "none";
+}
+
+}
 </script>
 
 </body>
