@@ -216,8 +216,11 @@ style="width:100%;max-width:700px;border-radius:15px;margin-bottom:20px;">
 </table>
 
 <hr>
-
 <h2>📝 افعال داستان</h2>
+
+<button onclick="showVerbs()">📝 نمایش افعال</button>
+
+<div id="verbs" style="display:none;">
 
 <h3>افعال مضارع</h3>
 
@@ -242,6 +245,8 @@ style="width:100%;max-width:700px;border-radius:15px;margin-bottom:20px;">
 <li>لا تخف</li>
 <li>لا تقل</li>
 </ul>
+
+</div>
 
 <hr>
 
@@ -321,6 +326,18 @@ else{
 }
 
 }
+        function showVerbs(){
+
+let x = document.getElementById("verbs");
+
+if(x.style.display === "none"){
+    x.style.display = "block";
+}
+else{
+    x.style.display = "none";
+}
+
+        }
 
 </script>
 
