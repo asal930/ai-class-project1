@@ -134,6 +134,10 @@ style="width:100%;max-width:700px;border-radius:15px;margin-bottom:20px;">
 
 <h2>📚 واژگان</h2>
 
+<button onclick="showWords()">📚 نمایش واژگان</button>
+
+<div id="words" style="display:none;">
+    
 <table border="1" cellpadding="8" width="100%">
 
 <tr>
@@ -324,6 +328,39 @@ else{
 }
 
 </script>
+    <script>
+
+function showStory(){
+
+let story = document.getElementById("story-text");
+
+if(story.style.display === "none"){
+    story.style.display = "block";
+}
+else{
+    story.style.display = "none";
+}
+
+}
+
+
+function showTranslation(){
+
+let x = document.getElementById("translation");
+
+if(x.style.display === "none"){
+    x.style.display = "block";
+}
+else{
+    x.style.display = "none";
+}
+
+}
+
+</script>
+
+</body>
+</html>
 </body>
 
 </html>
