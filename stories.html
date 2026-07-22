@@ -290,15 +290,32 @@ else{
 }
 </script>
     <script>
-function showTranslation(){
+<script>
 
-alert("دکمه کار می‌کند");
+function showStory(){
+
+let story = document.getElementById("story-text");
+
+if(story.style.display === "none"){
+    story.style.display = "block";
+}
+else{
+    story.style.display = "none";
+}
+
+}
+
+
+function showTranslation(){
 
 let x = document.getElementById("translation");
 
-x.style.display = "block";
+if(x.style.display === "none"){
+
+    x.style.display = "block";
 
 }
+else{
 
     x.style.display = "none";
 
@@ -306,7 +323,7 @@ x.style.display = "block";
 
 }
 
-    </script>
+</script>
 </body>
 
 </html>
