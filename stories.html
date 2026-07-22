@@ -86,7 +86,7 @@ style="width:100%;max-width:700px;border-radius:15px;margin-bottom:20px;">
 ـ حسنًا، اذهبي، ولكنني سأنتظرك هنا.
 
 </p>
-
+<p id="meaning"></p>
 <h2>🌐 ترجمه فارسی</h2>
 
 <button onclick="showTranslation()">🌐 نمایش ترجمه</button>
@@ -357,6 +357,13 @@ else{
 }
 
 }
+        function showMeaning(text){
+
+let x = document.getElementById("meaning");
+
+x.innerHTML = "📖 " + text;
+
+        }
 </script>
 
 </body>
