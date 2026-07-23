@@ -424,6 +424,75 @@ style="width:100%;max-width:700px;border-radius:15px;margin-bottom:20px;">
 
 <hr>
 
+    <h2>🎯 فعالیت کلاسی</h2>
+
+<button onclick="showActivities()">🎯 نمایش فعالیت‌ها</button>
+
+<div id="activities" style="display:none;">
+
+<h3>📝 فعالیت‌های گروهی و کلاسی</h3>
+
+<ol>
+
+<li>
+<strong>فعالیت ۱: نقش‌آفرینی داستان</strong>
+<br>
+دانش‌آموزان به چند گروه تقسیم شوند و نقش‌های پیرزن، گرگ، شیر و حیوانات دیگر را اجرا کنند.
+<br>
+الطلاب يمثلون شخصيات القصة مثل العجوز والذئب والأسد.
+</li>
+
+<br>
+
+<li>
+<strong>فعالیت ۲: ترتیب اتفاقات داستان</strong>
+<br>
+جمله‌های زیر را به ترتیب درست قرار دهید:
+<br>
+- دخلت العجوز داخل اليقطينة.
+<br>
+- قابلت العجوز الذئب.
+<br>
+- ذهبت العجوز إلى السوق.
+<br>
+- انكسرت اليقطينة.
+</li>
+
+<br>
+
+<li>
+<strong>فعالیت ۳: حدس بزن</strong>
+<br>
+یک دانش‌آموز یک شخصیت داستان را انتخاب می‌کند و بدون گفتن نام آن، ویژگی‌هایش را بیان می‌کند. بقیه حدس می‌زنند.
+<br>
+يختار الطالب شخصية من القصة ويصفها، والطلاب يخمنونها.
+</li>
+
+<br>
+
+<li>
+<strong>فعالیت ۴: داستان را تغییر بده</strong>
+<br>
+دانش‌آموزان پایان جدیدی برای داستان بنویسند.
+<br>
+اكتب نهاية جديدة للقصة.
+</li>
+
+<br>
+
+<li>
+<strong>فعالیت ۵: گفت‌وگوی کوتاه</strong>
+<br>
+بین دو شخصیت داستان یک گفت‌وگوی کوتاه عربی بنویسید.
+<br>
+اكتب حواراً قصيراً بين شخصيتين من القصة.
+</li>
+
+</ol>
+
+</div>
+
+<hr>
 </div>
 
 </div>
@@ -482,19 +551,7 @@ else{
 
         }
         
-function showQuestions(){
-
-let x = document.getElementById("questions");
-
-if(x.style.display === "none"){
-    x.style.display = "block";
-}
-else{
-    x.style.display = "none";
-}
-
-}
-        function showMeaning(word, meaning){
+box.style.display        function showMeaning(word, meaning){
 
 let old = document.querySelector(".meaning-box");
 
@@ -511,6 +568,18 @@ box.innerHTML = "📖 " + meaning;
 word.appendChild(box);
 
 }
+        function showActivities(){
+
+let box = document.getElementById("activities");
+
+if(box.style.display === "none"){
+    box.style.display = "block";
+}
+else{
+    box.style.display = "none";
+}
+
+        }
 </script>
 
 </body>
