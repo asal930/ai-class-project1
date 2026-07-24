@@ -78,38 +78,94 @@ style="width:100%;max-width:700px;border-radius:15px;margin-bottom:20px;">
 </video>
 <hr>
 <h2>📖 متن داستان</h2>
+<h3>📖 متن عربی داستان</h3>
 
-<button onclick="showStory()">📖 نمایش متن عربی</button>
+<p>
 
-<p id="story-text" style="display:none;">
+قصة <span class="word" onclick="showMeaning(this,'کدو تنبل')">اليقطينة</span> المتدحرجة (القرعة المتدحرجة)
 
-قصة اليقطينة المتدحرجة
+</p>
 
-كان يا ما كان، في قديم الزمان، كانت هناك <span class="word" onclick="showMeaning(this, 'پیرزن')">
-امرأة عجوز
-</span> تعيش وحدها في بيت صغير.
+<p>
 
-وذات يوم قالت في نفسها:
+كان يا ما كان، في قديم الزمان، كانت هناك
+<span class="word" onclick="showMeaning(this,'پیرزن')">امرأة عجوز</span>
+تعيش وحدها.
 
-«لقد اشتقت إلى <span class="word" onclick="showMeaning(this,'دخترم')">ابنتي</span> سأذهب لزيارتها.»
+وفي يوم من الأيام أرادت أن تزور
+<span class="word" onclick="showMeaning(this,'دختر')">ابنتها</span>
+الوحيدة.
 
-رتبت بيتها، وأغلقت الباب، ثم خرجت تسير في  
+رتّبت شؤون
+<span class="word" onclick="showMeaning(this,'خانه')">بيتها</span>،
+وأغلقت باب منزلها،
 
-وبينما كانت تمشي، ظهر أمامها <span class="word" onclick="showMeaning(this,'گرگ')">ذئب</span> ضخم وقال:
+ثم انطلقت في طريقها تمشي حتى وصلت إلى
+<span class="word" onclick="showMeaning(this,'دامنه کوه')">سفح جبل</span>.
 
-ـ إلى أين تذهبين أيتها العجوز؟
+</p>
 
-لقد حان وقت أن آكلك!
+<p>
 
-قالت العجوز:
+وفجأة ظهر أمامها
+<span class="word" onclick="showMeaning(this,'گرگ')">ذئب</span>
+ضخم،
 
-ـ يا بني، أنا الآن عجوز ضعيفة، ليس في جسدي إلا الجلد والعظم.
+واعترض طريقها وقال:
 
-دعني أذهب إلى <span class="word" onclick="showMeaning(this,'خانه')">بيت</span> ابنتي، فآكل وأرتاح حتى أسمن، ثم أرجع إليك، فتأكلني.
+<br><br>
 
-فكر الذئب قليلاً ثم قال:
+— إلى أين تذهبين أيتها العجوز؟
 
-ـ حسنًا، اذهبي، ولكنني سأنتظرك هنا.
+لقد حان وقت أن
+<span class="word" onclick="showMeaning(this,'تو را بخورم')">آكلك</span>!
+
+</p>
+
+<p>
+
+فقالت العجوز:
+
+<br><br>
+
+— يا بني،
+
+أنا الآن عجوز
+<span class="word" onclick="showMeaning(this,'لاغر و ناتوان')">هزيلة</span>،
+
+ليس في جسدي إلا
+
+<span class="word" onclick="showMeaning(this,'پوست')">الجلد</span>
+
+و
+
+<span class="word" onclick="showMeaning(this,'استخوان')">العظم</span>.
+
+دعني أذهب إلى بيت ابنتي،
+
+فآكل وأستريح حتى
+
+<span class="word" onclick="showMeaning(this,'چاق شوم')">أسمن</span>،
+
+ثم أعود إليك فتأكلني.
+
+</p>
+
+<p>
+
+فكّر الذئب قليلاً ثم قال:
+
+<br><br>
+
+— حسنًا،
+
+اذهبي،
+
+لكنني
+
+<span class="word" onclick="showMeaning(this,'منتظرت می‌مانم')">سأنتظرك</span>
+
+هنا.
 
 </p>
 <p id="meaning"></p>
@@ -595,6 +651,16 @@ else{
 
         }
 </script>
+<script>
+function showMeaning(element, meaning){
 
+let box=document.getElementById("meaningBox");
+
+box.innerHTML="<b>معنی:</b> "+meaning;
+
+box.style.display="block";
+
+}
+</script>
 </body>
 </html>
