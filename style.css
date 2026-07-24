@@ -320,3 +320,12 @@ border-radius:12px;
 font-size:18px;
 
 }
+
+#story-text p{
+    line-height:1.4;
+    margin:8px 0;
+}
+
+#story-text{
+    font-size:18px;
+}
