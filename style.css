@@ -333,3 +333,21 @@ font-size:18px;
     line-height:1.3 !important;
     margin:4px 0 !important;
 }
+
+.word{
+    position:relative;
+}
+
+.meaning-box{
+    position:absolute;
+    display:none;
+    top:30px;
+    right:0;
+    background:#fff3cd;
+    border:1px solid #ccc;
+    padding:8px;
+    border-radius:8px;
+    white-space:nowrap;
+    z-index:100;
+    font-size:14px;
+}
