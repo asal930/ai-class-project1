@@ -77,9 +77,17 @@ style="width:100%;max-width:700px;border-radius:15px;margin-bottom:20px;">
   مرورگر شما از پخش ویدئو پشتیبانی نمی‌کند.
 </video>
 <hr>
-<button onclick="showStory()">📖 متن داستان</button>
-<h3>📖 متن عربی داستان</h3>
-<div id="story-text" style="display:none;">
+
+
+<h2>📖 متن عربی داستان</h2>
+
+<button onclick="showPart('part1')">📖 بخش اول داستان</button>
+<button onclick="showPart('part2')">📖 بخش دوم داستان</button>
+<button onclick="showPart('part3')">📖 بخش سوم داستان</button>
+<button onclick="showPart('part4')">📖 بخش چهارم داستان</button>
+<button onclick="showPart('part5')">📖 بخش پنجم داستان</button>
+
+<div id="story-text">
 <p>
 
 قصة <span class="word" onclick="showMeaning(this,'کدو تنبل')">اليقطينة</span> المتدحرجة (القرعة المتدحرجة)
