@@ -361,3 +361,8 @@ font-size:18px;
     margin:0 !important;
     padding:0 !important;
 }
+.story-buttons button{
+    display:block;
+    width:100%;
+    margin:10px 0;
+}
