@@ -366,3 +366,28 @@ font-size:18px;
     width:100%;
     margin:10px 0;
 }
+.story-buttons{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:15px;
+}
+
+.story-buttons button{
+    flex:1 1 180px;
+    width:auto;
+}
+
+/* برای موبایل */
+@media(max-width:600px){
+
+.story-buttons{
+    display:block;
+}
+
+.story-buttons button{
+    width:100%;
+    margin-bottom:10px;
+}
+
+}
