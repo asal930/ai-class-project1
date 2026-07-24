@@ -639,9 +639,19 @@ else{
 <script>
 function showMeaning(element, meaning){
 
-let box=document.getElementById("meaningBox");
+let old=document.querySelector(".meaning-box");
+
+if(old){
+    old.remove();
+}
+
+let box=document.createElement("span");
+
+box.className="meaning-box";
 
 box.innerHTML="<b>معنی:</b> "+meaning;
+
+element.appendChild(box);
 
 box.style.display="block";
 
