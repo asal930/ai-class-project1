@@ -536,3 +536,16 @@ button{
     background:#1565c0;
     color:white;
 }
+.box > button{
+    width:48%;
+    display:inline-block;
+}
+
+.box > .main-action{
+    width:100% !important;
+    display:block !important;
+    background:#1565c0;
+    color:white;
+    font-size:18px;
+    padding:12px 25px;
+}
