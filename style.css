@@ -512,10 +512,7 @@ button{
 .box > button{
     display:inline-block;
 }
-.box button{
-    width:48%;
-    display:inline-block;
-}
+
 .main-action{
     width:100% !important;
     background:#1565c0;
