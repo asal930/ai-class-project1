@@ -505,3 +505,11 @@ button:hover{
 .main-action:hover{
     background:#0d47a1;
 }
+button{
+    min-width:160px;
+}
+
+.box > button{
+    display:inline-block;
+}
+
