@@ -457,3 +457,11 @@ input{
     border-radius:15px;
     margin:20px 0;
 }
+
+.form-box{
+    background:#ffffff;
+    padding:20px;
+    margin:20px 0;
+    border:2px solid #ddd;
+    border-radius:15px;
+}
