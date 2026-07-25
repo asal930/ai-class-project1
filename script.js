@@ -93,9 +93,9 @@ let cardClass = text.includes("📚 درس: عربی") ? "arabic-card" : "art-ca
         "<h3>📚 ایده ذخیره شده</h3>" +
         "<small>🗓️ " + date + "</small>" +
         "<p>" + text + "</p>" +
-        "<button onclick=\"editIdea('idea-" + id + "')\">✏️ ویرایش</button> " +
-"<button onclick=\"favoriteIdea('idea-" + id + "')\">⭐ مهم</button> " +
-"<button onclick=\"deleteIdea('idea-" + id + "')\">🗑 حذف ایده</button>" +
+        "<button class='edit-btn' onclick=\"editIdea('idea-" + id + "')\">✏️ ویرایش</button> " +
+"<button class='fav-btn' onclick=\"favoriteIdea('idea-" + id + "')\">⭐ مهم</button> " +
+"<button class='delete-btn' onclick=\"deleteIdea('idea-" + id + "')\">🗑 حذف ایده</button>"
         "</div>";
 updateStats();
     saveToLocal();
