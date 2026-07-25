@@ -594,8 +594,8 @@ style="width:100%;border-radius:12px;">
 <button onclick="showActivities()">📝 فعالیت کلاسی</button>
 
 <button onclick="showVerbs()">🔤 افعال داستان</button>
-
-</div>
+    </div>
+<div id="words" style="display:none;">
 <table border="1" cellpadding="8" width="100%">
 
 <tr>
@@ -936,24 +936,7 @@ if(story.style.display === "none"){
 }
 else{
     story.style.display = "none";
-}
-
-}
-
-function showTranslation(){
-
-let x = document.getElementById("translation");
-
-if(x.style.display === "none"){
-    x.style.display = "block";
-}
-else{
-    x.style.display = "none";
-}
-
-}
-
-function showWords(){
+}function showWords(){
 
 let x = document.getElementById("words");
 
@@ -1015,6 +998,23 @@ if(old){
 }
 
 let box=document.createElement("span");
+
+
+
+}
+
+function showTranslation(){
+
+let x = document.getElementById("translation");
+
+if(x.style.display === "none"){
+    x.style.display = "block";
+}
+else{
+    x.style.display = "none";
+}
+
+}
 
 box.className="meaning-box";
 
