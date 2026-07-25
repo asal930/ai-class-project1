@@ -471,3 +471,13 @@ button{
 button:hover{
     transform:translateY(-2px);
 }
+.main-action{
+    background:#1565c0;
+    color:white;
+    font-size:18px;
+    padding:12px 25px;
+}
+
+.main-action:hover{
+    background:#0d47a1;
+}
