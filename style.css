@@ -557,3 +557,12 @@ button{
     line-height:2;
     min-height:80px;
 }
+.stats{
+    background:#f8f9fa;
+    border-radius:12px;
+    padding:15px;
+    margin:15px 0;
+    text-align:center;
+    border:1px solid #ddd;
+    font-weight:bold;
+}
