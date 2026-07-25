@@ -399,3 +399,19 @@ font-size:18px;
     margin-top:25px;
     color:#333;
 }
+.story-buttons button{
+    background:#c62828;
+    color:white;
+    border:none;
+    padding:10px 15px;
+    margin:5px;
+    border-radius:10px;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.story-buttons button:hover{
+    background:#8e0000;
+    transform:translateY(-2px);
+}
