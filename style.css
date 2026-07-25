@@ -577,4 +577,22 @@ h2{
     border:1px solid #ddd;
     box-shadow:0 3px 10px rgba(0,0,0,0.08);
     line-height:2;
+}.edit-btn{
+    background:#1565c0;
+    color:white;
+}
+
+.fav-btn{
+    background:#f9a825;
+    color:white;
+}
+
+.delete-btn{
+    background:#d32f2f;
+    color:white;
+}
+
+.idea-card button:hover{
+    transform:translateY(-2px);
+    opacity:0.9;
 }
