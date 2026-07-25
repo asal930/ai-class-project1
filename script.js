@@ -134,6 +134,15 @@ function deleteIdea(id){
 
     alert("ایده حذف شد ✅");
 }
+function copyIdea(id){
+
+    let idea = document.getElementById(id);
+    let text = idea.querySelector("p").innerText;
+
+    navigator.clipboard.writeText(text);
+
+    alert("📋 ایده کپی شد.");
+}
 updateStats();
 function saveToLocal(){
 
