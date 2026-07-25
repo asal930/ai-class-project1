@@ -569,3 +569,12 @@ button{
 h2{
     color:#333;
 }
+#savedIdeas{
+    background:#fff;
+    border-radius:15px;
+    padding:20px;
+    margin-top:15px;
+    border:1px solid #ddd;
+    box-shadow:0 3px 10px rgba(0,0,0,0.08);
+    line-height:2;
+}
