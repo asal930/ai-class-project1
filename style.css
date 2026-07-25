@@ -512,4 +512,7 @@ button{
 .box > button{
     display:inline-block;
 }
-
+.box button{
+    width:48%;
+    display:inline-block;
+}
