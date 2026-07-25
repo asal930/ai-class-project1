@@ -415,3 +415,14 @@ font-size:18px;
     background:#8e0000;
     transform:translateY(-2px);
 }
+
+.welcome{
+    background:#f8f9fa;
+    border-radius:15px;
+    padding:20px;
+    margin:20px 0;
+    text-align:center;
+    font-size:18px;
+    line-height:2;
+    border:1px solid #ddd;
+}
