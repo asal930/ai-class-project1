@@ -450,14 +450,7 @@ input{
     border:1px solid #ccc;
     font-size:16px;
 }
-.form-box{
-    background:#ffffff;
-    padding:20px;
-    margin:20px 0;
-    border:1px solid #ddd;
-    border-radius:15px;
-    box-shadow:0 3px 10px rgba(0,0,0,0.08);
-}
+
 button{
     border:none;
     border-radius:10px;
