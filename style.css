@@ -546,3 +546,14 @@ button{
     font-size:18px;
     padding:12px 25px;
 }
+
+.result{
+    background:#ffffff;
+    border-radius:15px;
+    padding:20px;
+    margin:20px 0;
+    border:1px solid #ddd;
+    box-shadow:0 3px 10px rgba(0,0,0,0.08);
+    line-height:2;
+    min-height:80px;
+}
