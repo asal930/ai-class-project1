@@ -426,3 +426,27 @@ font-size:18px;
     line-height:2;
     border:1px solid #ddd;
 }
+.form-box{
+    background:#ffffff;
+    border-radius:15px;
+    padding:20px;
+    margin:20px 0;
+    border:1px solid #ddd;
+    box-shadow:0 3px 10px rgba(0,0,0,0.08);
+}
+
+label{
+    display:block;
+    margin-top:15px;
+    font-weight:bold;
+}
+
+select,
+input{
+    width:100%;
+    padding:10px;
+    margin-top:8px;
+    border-radius:8px;
+    border:1px solid #ccc;
+    font-size:16px;
+}
