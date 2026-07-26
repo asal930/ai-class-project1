@@ -270,20 +270,15 @@ button:hover{
 }
 
 .main-menu a{
-
+    display:inline-block;
     color:white;
-
     text-decoration:none;
-
-    margin:12px;
-
+    margin:8px;
+    padding:10px 12px;
     font-size:18px;
-
     font-weight:bold;
-
     transition:0.3s;
 }
-
 .main-menu a:hover{
 
     color:#ffd54f;
