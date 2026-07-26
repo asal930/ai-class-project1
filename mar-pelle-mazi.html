@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>بازی مار و پله عربی</title>
+
+<style>
+
+body{
+font-family:tahoma;
+background:linear-gradient(135deg,#0f172a,#1e3a8a);
+color:white;
+text-align:center;
+margin:0;
+}
+
+h2{margin-top:10px}
+
+.board{
+display:grid;
+grid-template-columns:repeat(5,1fr);
+gap:6px;
+max-width:720px;
+margin:auto;
+}
+
+.cell{
+height:60px;
+background:#334155;
+border-radius:10px;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+font-size:12px;
+}
+
+.reward{background:#16a34a}
+.punish{background:#dc2626}
+
+.player{
+width:14px;
+height:14px;
+border-radius:50%;
+margin-top:2px;
+}
+
+.p1{background:#a855f7}
+.p2{background:#f59e0b}
+
+#dice{
+font-size:90px;
+margin-top:10px;
+transition:transform .8s;
+}
+
+.roll{
+transform:rotate(1080deg) scale(1.2);
+}
+
+.turnbox{
+font-size:24px;
+margin:10px;
+color:#facc15;
+font-weight:bold;
+}
+
+button{
+padding:10px 25px;
+border:none;
+border-radius:10px;
+background:#2563eb;
+color:white;
+font-size:16px;
+cursor:pointer;
+margin:5px;
+}
+
+.popup{
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:white;
+color:black;
+padding:20px;
+border-radius:12px;
+width:330px;
+display:none;
+}
+
+.option{
+background:#e2e8f0;
+margin:6px;
+padding:8px;
+border-radius:6px;
+cursor:pointer;
+}
+
+.option:hover{background:#c7d2fe}
+
+.msg{margin-top:10px;font-weight:bold}
+
+footer{
+margin-top:30px;
+background:#020617;
+padding:15px;
+font-size:14px;
+}
+
+footer a{
+color:#38bdf8;
+text-decoration:none;
+font-weight:bold;
+}
+
+/* confetti */
+
+#confettiBox{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+pointer-events:none;
+overflow:hidden;
+}
+
+.confetti{
+position:absolute;
+width:8px;
+height:8px;
+animation:fall 2s linear forwards;
+}
+
+@keyframes fall{
+0%{transform:translateY(-20px) rotate(0deg);}
+100%{transform:translateY(100vh) rotate(720deg);opacity:0;}
+}
+
+</style>
+</head>
+
+<body>
+
+<h2>🎲 مار و پله عربی پایه هفتم</h2>
+
+<div id="turn" class="turnbox"></div>
+
+<div id="board" class="board"></div>
+
+<div id="dice">🎲</div>
+<div id="diceNum"></div>
+
+<button onclick="rollDice()">انداختن تاس</button>
+
+<div id="popup" class="popup">
+<div id="question"></div>
+<div id="answers"></div>
+<div id="msg" class="msg"></div>
+</div>
+
+<div id="confettiBox"></div>
+
+<audio id="diceSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_6d0b8b4f0e.mp3"></audio>
+<audio id="stepSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_8bdb9d21bb.mp3"></audio>
+<audio id="winSound" src="https://cdn.pixabay.com/download/audio/2021/08/04/audio_5c2c84e0f7.mp3"></audio>
+
+<audio id="correctSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_3f7d94a0b6.mp3"></audio>
+<audio id="wrongSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_9b59f54c4f.mp3"></audio>
+
+<audio id="clapSound" src="https://cdn.pixabay.com/download/audio/2022/03/10/audio_270cc8b6d1.mp3"></audio>
+
+<footer>
+
+<div>
+© <a href="https://eitaa.com/arabi789_ansari" target="_blank">
+سید امین عسکری | عربی ۷۸۹
+</a>
+</div>
+
+<div>
+<button onclick="shareEitaa()">اشتراک در ایتا</button>
+<button onclick="shareBale()">اشتراک در بله</button>
+<button onclick="shareShad()">اشتراک در شاد</button>
+</div>
+
+</footer>
+
+<script>
+
+const rewards={3:11,8:17,15:24}
+const punish={14:6,22:9,27:18}
+
+let player=1
+let bot=1
+let turn=1
+let dice=0
+
+let questions=[
+
+{q:"معنای جمله چیست؟",s:"أَنَا ذَهَبْتُ إِلَى السُّوقِ",o:["من به بازار رفتم","من به بازار می‌روم","من به بازار خواهم رفت"],a:0},
+{q:"ترجمه صحیح را انتخاب کنید",s:"كَتَبْتُ الدَّرْسَ",o:["درس را نوشتم","درس را خواندم","درس را می‌نویسم"],a:0},
+{q:"فاعل جمله کدام است؟",s:"ذَهَبْتُ إِلَى الْبَيْتِ",o:["من","او","تو"],a:0},
+{q:"معنای جمله چیست؟",s:"هُمْ ذَهَبُوا إِلَى السُّوقِ",o:["آنها به بازار رفتند","او به بازار رفت","ما به بازار رفتیم"],a:0},
+{q:"ترجمه صحیح را انتخاب کنید",s:"اَلْمُعَلِّمُ فِي الْفَصْلِ",o:["معلم در کلاس است","معلم در خانه است","معلم در بازار است"],a:0}
+
+]
+
+questions=questions.sort(()=>Math.random()-0.5)
+let qIndex=0
+
+function nextQuestion(){
+
+if(qIndex>=questions.length){
+questions=questions.sort(()=>Math.random()-0.5)
+qIndex=0
+}
+
+return questions[qIndex++]
+
+}
+
+function celebrate(){
+
+clapSound.play()
+
+for(let i=0;i<60;i++){
+
+let c=document.createElement("div")
+c.className="confetti"
+
+c.style.left=Math.random()*100+"%"
+c.style.background=`hsl(${Math.random()*360},90%,60%)`
+
+confettiBox.appendChild(c)
+
+setTimeout(()=>{c.remove()},2000)
+
+}
+
+}
+
+function drawBoard(){
+
+let html=""
+let rows=[]
+
+for(let i=1;i<=30;i++)rows.push(i)
+
+let grid=[]
+for(let r=0;r<6;r++){
+let row=rows.slice(r*5,r*5+5)
+if(r%2==1)row.reverse()
+grid.push(row)
+}
+
+grid.reverse()
+
+grid.forEach(row=>{
+row.forEach(i=>{
+
+let cls="cell"
+let text=i
+
+if(rewards[i]){cls+=" reward";text=i+" 🪜"}
+if(punish[i]){cls+=" punish";text=i+" 🐍"}
+
+html+=`<div class="${cls}">
+${text}
+${i===player?'<div class="player p1"></div>':''}
+${i===bot?'<div class="player p2"></div>':''}
+</div>`
+
+})
+})
+
+board.innerHTML=html
+document.getElementById("turn").innerHTML = turn===1 ? "👤 نوبت شماست" : "🤖 نوبت کامپیوتر"
+
+}
+
+function rollDice(){
+
+if(turn!==1)return
+
+diceSound.play()
+
+let diceElement=document.getElementById("dice")
+diceElement.classList.add("roll")
+
+setTimeout(()=>{
+
+diceElement.classList.remove("roll")
+
+dice=Math.floor(Math.random()*6)+1
+
+const faces=["⚀","⚁","⚂","⚃","⚄","⚅"]
+
+diceElement.innerText=faces[dice-1]
+diceNum.innerText="عدد تاس: "+dice
+
+showQuestion()
+
+},800)
+
+}
+
+function showQuestion(){
+
+popup.style.display="block"
+
+let q=nextQuestion()
+
+question.innerHTML="<b>"+q.q+"</b><br><br>"+q.s
+
+let html=""
+
+q.o.forEach((opt,i)=>{
+html+=`<div class="option" onclick="answer(${i},${q.a})">${opt}</div>`
+})
+
+answers.innerHTML=html
+msg.innerText=""
+
+}
+
+function answer(i,a){
+
+if(i===a){
+
+correctSound.play()
+celebrate()
+
+msg.innerText="✅ آفرین!"
+
+setTimeout(()=>{
+popup.style.display="none"
+movePlayer()
+},700)
+
+}else{
+
+wrongSound.play()
+msg.innerText="❌ غلط — دوباره تلاش کنید"
+
+}
+
+}
+
+function movePlayer(){
+
+let steps=dice
+let c=0
+
+let inter=setInterval(()=>{
+
+if(c<steps){
+
+stepSound.currentTime=0
+stepSound.play()
+
+if(turn===1)player++
+else bot++
+
+drawBoard()
+c++
+
+}else{
+
+clearInterval(inter)
+
+let pos=turn===1?player:bot
+
+if(rewards[pos])pos=rewards[pos]
+if(punish[pos])pos=punish[pos]
+
+if(turn===1)player=pos
+else bot=pos
+
+if(pos>=30){
+
+winSound.play()
+alert(turn===1?"🏆 شما برنده شدید":"🤖 کامپیوتر برنده شد")
+location.reload()
+
+}
+
+turn=turn===1?2:1
+drawBoard()
+
+if(turn===2)setTimeout(botPlay,1000)
+
+}
+
+},200)
+
+}
+
+function botPlay(){
+
+dice=Math.floor(Math.random()*6)+1
+diceNum.innerText="عدد تاس: "+dice
+
+setTimeout(movePlayer,600)
+
+}
+
+function shareEitaa(){
+window.open("https://eitaa.com/share/url?url="+location.href)
+}
+
+function shareBale(){
+window.open("https://ble.ir/share/url?url="+location.href)
+}
+
+function shareShad(){
+alert("لینک بازی را در شاد ارسال کنید:\n"+location.href)
+}
+
+drawBoard()
+
+</script>
+
+</body>
+</html>
