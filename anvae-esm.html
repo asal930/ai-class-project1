@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>بازی دسته‌بندی عربی</title>
+
+<style>
+body{
+    font-family: Tahoma, sans-serif;
+    margin:0;
+    background: linear-gradient(135deg,#4e73df,#1cc88a);
+    text-align:center;
+    color:#fff;
+}
+
+header{
+    padding:10px;
+}
+
+#scoreBoard{
+    display:flex;
+    justify-content:space-around;
+    font-size:18px;
+    margin-bottom:10px;
+}
+
+.container{
+    padding:10px;
+}
+
+.baskets{
+    display:flex;
+    overflow-x:auto;
+    gap:10px;
+    padding-bottom:10px;
+}
+
+.basket{
+    min-width:160px;
+    min-height:130px;
+    background:#fff;
+    color:#333;
+    border-radius:15px;
+    padding:10px;
+    flex-shrink:0;
+    box-shadow:0 4px 10px rgba(0,0,0,0.3);
+}
+
+.basket h3{
+    font-size:14px;
+    margin:5px 0;
+}
+
+.words{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:10px;
+    margin-top:15px;
+}
+
+.word{
+    background:#f8f9fc;
+    color:#333;
+    padding:8px 12px;
+    border-radius:10px;
+    cursor:grab;
+    user-select:none;
+    box-shadow:0 3px 6px rgba(0,0,0,0.2);
+    transition:0.3s;
+}
+
+.word.correct{
+    background:#1cc88a;
+    color:#fff;
+}
+
+.word.wrong{
+    animation: shake 0.3s;
+    background:#e74a3b;
+    color:#fff;
+}
+
+@keyframes shake{
+    0%{transform:translateX(0)}
+    25%{transform:translateX(-5px)}
+    50%{transform:translateX(5px)}
+    75%{transform:translateX(-5px)}
+    100%{transform:translateX(0)}
+}
+
+.modal{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.6);
+    display:none;
+    justify-content:center;
+    align-items:center;
+}
+
+.modal-content{
+    background:#fff;
+    color:#333;
+    padding:20px;
+    border-radius:15px;
+}
+
+button{
+    padding:8px 15px;
+    border:none;
+    background:#4e73df;
+    color:#fff;
+    border-radius:10px;
+    margin-top:10px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h2>🎯 بازی دسته‌بندی کلمات عربی</h2>
+<div id="scoreBoard">
+<div>⏱ زمان: <span id="timer">120</span></div>
+<div>⭐ امتیاز: <span id="score">0</span></div>
+</div>
+</header>
+
+<div class="container">
+
+<div class="baskets" id="baskets"></div>
+
+<div class="words" id="words"></div>
+
+</div>
+
+<div class="modal" id="modal">
+<div class="modal-content">
+<h3 id="modalText"></h3>
+<button onclick="location.reload()">شروع دوباره</button>
+</div>
+</div>
+
+    <div class="footer">
+       <a href="https://eitaa.com/arabi789_ansari" target="_blank">آموزش عربی هفتم تا نهم - انصاری</a>
+    </div>
+  </div>
+
+<script>
+const categories = {
+"مفرد مذکر":["باب","سِروال","کِتاب","سَمَک"],
+"مفرد مؤنث":["مِنضَدَة","سَیّارَة","أُخت","مریم"],
+"مثنی مذکر":["کُرسیّانِ","صَفّانِ","رَجُلَینِ","وَلَدَینِ"],
+"مثنی مؤنث":["شَجَرَتانِ","وَردَتَینِ","مِنضَدَتانِ","سَمَکَتَینِ"],
+"جمع مذکر سالم":["عالِمونَ","فَلّاحینَ","جالِسونَ","واقِفینَ"],
+"جمع مؤنث سالم":["طالِبات","مُؤمِنات","فَلّاحات","صابِرات"],
+"جمع مکسر":["حَدائِق","رِجال","أَسماک","أَشجار"]
+};
+
+let score=0;
+let timeLeft=120;
+let totalCorrect=0;
+
+const basketsDiv=document.getElementById("baskets");
+const wordsDiv=document.getElementById("words");
+const scoreSpan=document.getElementById("score");
+const timerSpan=document.getElementById("timer");
+
+function createBaskets(){
+for(let cat in categories){
+let div=document.createElement("div");
+div.className="basket";
+div.dataset.category=cat;
+div.innerHTML=`<h3>${cat}</h3>`;
+div.addEventListener("dragover",e=>e.preventDefault());
+div.addEventListener("drop",dropWord);
+basketsDiv.appendChild(div);
+}
+}
+
+function shuffle(array){
+return array.sort(()=>Math.random()-0.5);
+}
+
+function createWords(){
+let allWords=[];
+for(let cat in categories){
+categories[cat].forEach(w=>{
+allWords.push({word:w,category:cat});
+});
+}
+
+shuffle(allWords).forEach(obj=>{
+let div=document.createElement("div");
+div.className="word";
+div.textContent=obj.word;
+div.draggable=true;
+div.dataset.category=obj.category;
+
+div.addEventListener("dragstart",dragWord);
+wordsDiv.appendChild(div);
+});
+}
+
+function dragWord(e){
+e.dataTransfer.setData("text",e.target.textContent);
+}
+
+function dropWord(e){
+e.preventDefault();
+let wordText=e.dataTransfer.getData("text");
+let wordEl=[...document.querySelectorAll(".word")].find(w=>w.textContent===wordText);
+
+if(wordEl.dataset.category===this.dataset.category){
+this.appendChild(wordEl);
+wordEl.classList.add("correct");
+wordEl.draggable=false;
+score+=10;
+totalCorrect++;
+playSound(600);
+}else{
+wordEl.classList.add("wrong");
+setTimeout(()=>wordEl.classList.remove("wrong"),300);
+score-=5;
+playSound(200);
+}
+
+scoreSpan.textContent=score;
+
+if(totalCorrect===28){
+endGame(true);
+}
+}
+
+function playSound(freq){
+let ctx=new (window.AudioContext||window.webkitAudioContext)();
+let osc=ctx.createOscillator();
+osc.type="sine";
+osc.frequency.value=freq;
+osc.connect(ctx.destination);
+osc.start();
+osc.stop(ctx.currentTime+0.15);
+}
+
+function startTimer(){
+let interval=setInterval(()=>{
+timeLeft--;
+timerSpan.textContent=timeLeft;
+if(timeLeft<=0){
+clearInterval(interval);
+endGame(false);
+}
+},1000);
+}
+
+function endGame(win){
+document.getElementById("modal").style.display="flex";
+document.getElementById("modalText").textContent=
+win?"🎉 أحسنت! بارَکَ اللهُ فیک.":
+"⏳ وقت تمام شد . یک بار دیگر تلاش کن.";
+}
+
+createBaskets();
+createWords();
+startTimer();
+</script>
+
+</body>
+</html>
