@@ -200,6 +200,43 @@ body{
 }
 
 }
+    /* بزرگ کردن بازی در موبایل */
+@media (max-width:600px){
+
+body{
+    transform: scale(1.15);
+    transform-origin: top center;
+}
+
+header{
+    font-size: 1.5rem;
+}
+
+.game-container{
+    max-width:100%;
+    grid-template-columns: repeat(2, 1fr);
+    gap:15px;
+}
+
+.card{
+    min-height:100px;
+    padding:20px 10px;
+    border-radius:15px;
+}
+
+.arabic{
+    font-size:2.2rem !important;
+}
+
+.persian{
+    font-size:1.5rem !important;
+}
+
+.timer{
+    font-size:1.5rem;
+}
+
+}
   </style>
 </head>
 <body>
