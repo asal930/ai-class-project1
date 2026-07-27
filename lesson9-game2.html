@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>آزمون عربی هشتم – واژه های درس ۹</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Tahoma', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+    }
+
+    .container {
+      background: #fff;
+      width: 100%;
+      max-width: 460px;
+      border-radius: 14px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+      overflow: hidden;
+      position: relative;
+    }
+
+    header {
+      background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+      color: white;
+      text-align: center;
+      padding: 20px 10px;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .screen {
+      padding: 20px;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      min-height: 300px;
+    }
+
+    .screen.active {
+      display: flex;
+    }
+
+    .input-group {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 14px;
+      border: 2px solid #ddd;
+      border-radius: 12px;
+      font-size: 18px;
+      text-align: center;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+
+    input[type="text"]:focus {
+      border-color: #2575fc;
+    }
+
+    .btn {
+      background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      font-size: 20px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform 0.1s, box-shadow 0.2s;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+
+    .question {
+      font-size: 20px;
+      text-align: center;
+      margin-bottom: 18px;
+      font-weight: bold;
+      line-height: 1.6;
+    }
+
+    .emoji {
+      font-size: 48px;
+      margin-bottom: 16px;
+      display: block;
+      animation: bounce 1.5s infinite alternate;
+    }
+
+    @keyframes bounce {
+      from { transform: translateY(0); }
+      to { transform: translateY(-8px); }
+    }
+
+    .options {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .option {
+      background: #f9f9f9;
+      border: 2px solid #eee;
+      padding: 16px;
+      border-radius: 12px;
+      font-size: 18px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .option:hover {
+      background: #f0f0f0;
+    }
+
+    .option.selected {
+      background: #e3f2fd;
+      border-color: #2575fc;
+      color: #2575fc;
+    }
+
+    .option.correct {
+      background: #e8f5e9;
+      border-color: #4caf50;
+      color: #2e7d32;
+    }
+
+    .option.wrong {
+      background: #ffebee;
+      border-color: #ef5350;
+      color: #c62828;
+    }
+
+    .feedback {
+      margin-top: 16px;
+      padding: 12px;
+      border-radius: 10px;
+      text-align: center;
+      font-weight: bold;
+      width: 100%;
+      display: none;
+    }
+
+    .feedback.show {
+      display: block;
+    }
+
+    .feedback.correct {
+      background: #e8f5e9;
+      color: #2e7d32;
+    }
+
+    .feedback.wrong {
+      background: #ffebee;
+      color: #c62828;
+    }
+
+    .footer {
+      background: #f5f5f5;
+      padding: 12px;
+      text-align: center;
+      font-size: 14px;
+      border-top: 1px solid #eee;
+    }
+
+    .footer a {
+      color: #2575fc;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .results-list {
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      margin: 16px 0;
+      padding: 0;
+    }
+
+    .result-item {
+      background: #fff;
+      border: 1px solid #eee;
+      border-radius: 10px;
+      padding: 14px;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    .result-item.wrong {
+      border-left: 4px solid #ef5350;
+    }
+
+    .result-item.correct {
+      border-left: 4px solid #4caf50;
+    }
+
+    .result-item .q-text {
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    .result-item .user-answer {
+      color: #c62828;
+    }
+
+    .result-item .correct-answer {
+      color: #2e7d32;
+      font-weight: bold;
+    }
+
+    .score {
+      font-size: 28px;
+      text-align: center;
+      margin: 10px 0 20px;
+      font-weight: bold;
+      color: #2575fc;
+    }
+
+    .user-name-display {
+      font-size: 28px;
+      text-align: center;
+      margin-bottom: 16px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>آزمون عربی هشتم – واژه های درس ۹</header>
+
+  <!-- صفحه شروع -->
+  <div id="start-screen" class="screen active">
+    <div class="emoji">🎓</div>
+    <h2 style="margin-bottom: 16px; text-align: center;">خوش آمدید!</h2>
+    <p style="text-align: center; margin-bottom: 20px;">لطفاً نام خود را وارد کنید:</p>
+    <div class="input-group">
+      <input type="text" id="username" placeholder="نام و نام خانوادگی" autocomplete="off">
+    </div>
+    <button class="btn" onclick="startGame()">شروع آزمون</button>
+  </div>
+
+  <!-- صفحه بازی -->
+  <div id="game-screen" class="screen">
+    <div class="question" id="question-text"></div>
+    <span class="emoji" id="question-emoji"></span>
+    <div class="options" id="options-container"></div>
+    <div class="feedback" id="feedback"></div>
+    <button class="btn" id="next-btn" onclick="nextQuestion()" disabled>سؤال بعدی</button>
+  </div>
+
+  <!-- صفحه نتایج -->
+  <div id="result-screen" class="screen">
+    <div class="user-name-display" id="result-username"></div>
+    <div class="score" id="final-score"></div>
+    <div class="results-list" id="results-list"></div>
+    <button class="btn" onclick="restartGame()">شروع مجدد</button>
+  </div>
+
+  <div class="footer">
+     <a href="https://eitaa.com/arabi789_ansari" target="_blank">عربی برای شما</a>
+  </div>
+</div>
+
+<script>
+  // سؤالات آزمون
+  const questions = [
+    {
+      text: "معنیِ کدام کلمه درست است؟",
+      options: ["فُرشاة : خمیر دندان", "مُحافَظَة : کشور", "فَطور : صبحانه"],
+      correct: 2,
+      emoji: "🍳"
+    },
+    {
+      text: "معنیِ کدام کلمه درست است؟",
+      options: ["شَلّالات : آبشار", "أَزهار : شکوفه ها", "مَطاعِم : رستوران"],
+      correct: 1,
+      emoji: "🌸"
+    },
+    {
+      text: "معنیِ کدام کلمه «نادرست» است؟",
+      options: ["مَسموح : مُجاز", "زَهر : گل ، شکوفه", "غَداء : فردا"],
+      correct: 2,
+      emoji: "❌"
+    },
+    {
+      text: "معنیِ کدام کلمه «نادرست» است؟",
+      options: ["أسنان : دندان ها", "اَلّذینَ : کسی که", "مِنشَفَة : حوله"],
+      correct: 1,
+      emoji: "🧣"
+    },
+    {
+      text: "ترجمه «ذَنب ، ذِئب» به ترتیب کدام است؟",
+      options: ["گناه ، گرگ", "گناهان ، گرگ ها", "گناهان ، گرگ"],
+      correct: 0,
+      emoji: "🐺"
+    },
+    {
+      text: "کدام یک جزئی از بدن انسان است؟",
+      options: ["زَهر", "سِنّ", "ذَنب"],
+      correct: 1,
+      emoji: "🦷"
+    },
+    {
+      text: "کدام کلمه از لحاظ معنایی با بقیه متفاوت است؟",
+      options: ["مَعجون أسنان", "فُرشاة", "فِضّیّ"],
+      correct: 2,
+      emoji: "✨"
+    },
+    {
+      text: "کدام کلمه از لحاظ معنایی با بقیه ناهماهنگ است؟",
+      options: ["فَطور", "غَداء", "مَساء"],
+      correct: 2,
+      emoji: "🌙"
+    },
+    {
+      text: "ترجمه «بِمَ» کدام است؟",
+      options: ["با چه کسی", "با چه چیزی", "برای چه"],
+      correct: 1,
+      emoji: "❓"
+    },
+    {
+      text: "جمع مکسّر کدام کلمه نادرست است؟",
+      options: ["مَلعَب : مَلاعِب", "زَهر : أزهار", "سَنَة : أسنان"],
+      correct: 2,
+      emoji: "📅"
+    }
+  ];
+
+  // متغیرهای بازی
+  let currentQuestionIndex = 0;
+  let selectedOptionIndex = null;
+  let userName = '';
+  let score = 0;
+  let userAnswers = [];
+
+  // صداها
+  const correctSound = new Audio('data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YU'); // placeholder
+  const wrongSound = new Audio('data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YU'); // placeholder
+
+  // تولید صدا با Web Audio API (بدون نیاز به فایل خارجی)
+  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  
+  function playCorrectSound() {
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    const oscillator = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+    oscillator.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+    oscillator.type = 'sine';
+    oscillator.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5
+    oscillator.frequency.exponentialRampToValueAtTime(1046.5, audioCtx.currentTime + 0.1); // C6
+    gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+    oscillator.start();
+    oscillator.stop(audioCtx.currentTime + 0.3);
+  }
+
+  function playWrongSound() {
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    const oscillator = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+    oscillator.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+    oscillator.type = 'sawtooth';
+    oscillator.frequency.setValueAtTime(150, audioCtx.currentTime);
+    oscillator.frequency.linearRampToValueAtTime(100, audioCtx.currentTime + 0.2);
+    gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+    oscillator.start();
+    oscillator.stop(audioCtx.currentTime + 0.3);
+  }
+
+  // شروع بازی
+  function startGame() {
+    const usernameInput = document.getElementById('username');
+    if (!usernameInput.value.trim()) {
+      alert('لطفاً نام خود را وارد کنید.');
+      return;
+    }
+    userName = usernameInput.value.trim();
+    document.getElementById('start-screen').classList.remove('active');
+    document.getElementById('game-screen').classList.add('active');
+    loadQuestion();
+  }
+
+  // بارگذاری سؤال
+  function loadQuestion() {
+    const q = questions[currentQuestionIndex];
+    document.getElementById('question-text').textContent = `${currentQuestionIndex + 1}. ${q.text}`;
+    document.getElementById('question-emoji').textContent = q.emoji;
+    
+    const optionsContainer = document.getElementById('options-container');
+    optionsContainer.innerHTML = '';
+    
+    q.options.forEach((option, index) => {
+      const btn = document.createElement('div');
+      btn.className = 'option';
+      btn.textContent = option;
+      btn.onclick = () => selectOption(index, btn);
+      optionsContainer.appendChild(btn);
+    });
+
+    selectedOptionIndex = null;
+    document.getElementById('next-btn').disabled = true;
+    document.getElementById('feedback').className = 'feedback';
+    document.getElementById('feedback').style.display = 'none';
+  }
+
+  // انتخاب گزینه
+  function selectOption(index, element) {
+    if (selectedOptionIndex !== null) return; // جلوگیری از انتخاب مجدد
+
+    selectedOptionIndex = index;
+    const q = questions[currentQuestionIndex];
+    const options = document.querySelectorAll('.option');
+    
+    // نمایش انتخاب
+    options.forEach((opt, i) => {
+      if (i === index) opt.classList.add('selected');
+      else opt.style.opacity = '0.7';
+    });
+
+    // بازخورد
+    const feedback = document.getElementById('feedback');
+    if (index === q.correct) {
+      score++;
+      element.classList.add('correct');
+      feedback.textContent = '✅ پاسخ صحیح است!';
+      feedback.className = 'feedback show correct';
+      playCorrectSound();
+    } else {
+      element.classList.add('wrong');
+      options[q.correct].classList.add('correct');
+      feedback.textContent = '❌ پاسخ غلط است. پاسخ صحیح: ' + q.options[q.correct];
+      feedback.className = 'feedback show wrong';
+      playWrongSound();
+    }
+
+    // ذخیره پاسخ برای نتایج
+    userAnswers.push({
+      question: q.text,
+      userAnswer: q.options[index],
+      correctAnswer: q.options[q.correct],
+      isCorrect: index === q.correct
+    });
+
+    // فعال کردن دکمه بعدی
+    document.getElementById('next-btn').disabled = false;
+  }
+
+  // سؤال بعدی
+  function nextQuestion() {
+    currentQuestionIndex++;
+    if (currentQuestionIndex < questions.length) {
+      loadQuestion();
+    } else {
+      showResults();
+    }
+  }
+
+  // نمایش نتایج
+  function showResults() {
+    document.getElementById('game-screen').classList.remove('active');
+    document.getElementById('result-screen').classList.add('active');
+    
+    document.getElementById('result-username').textContent = userName;
+    document.getElementById('final-score').textContent = `${score} از ${questions.length}`;
+    
+    const resultsList = document.getElementById('results-list');
+    resultsList.innerHTML = '';
+    
+    userAnswers.forEach((answer, index) => {
+      if (!answer.isCorrect) {
+        const item = document.createElement('div');
+        item.className = 'result-item wrong';
+        item.innerHTML = `
+          <div class="q-text">سوال ${index + 1}: ${answer.question}</div>
+        <div class="user-answer">پاسخ شما: ${answer.userAnswer}</div>
+          <div class="correct-answer">پاسخ صحیح: ${answer.correctAnswer}</div>
+        `;
+        resultsList.appendChild(item);
+      }
+    });
+
+    // اگر همه پاسخ‌ها صحیح بودند
+    if (userAnswers.filter(a => !a.isCorrect).length === 0) {
+      const allCorrect = document.createElement('div');
+      allCorrect.className = 'result-item correct';
+      allCorrect.style.textAlign = 'center';
+      allCorrect.style.fontWeight = 'bold';
+      allCorrect.textContent = '🎉 عالی! تمام پاسخ‌ها صحیح بودند.';
+      resultsList.appendChild(allCorrect);
+    }
+  }
+
+  // شروع مجدد
+  function restartGame() {
+    currentQuestionIndex = 0;
+    score = 0;
+    userAnswers = [];
+    document.getElementById('result-screen').classList.remove('active');
+    document.getElementById('start-screen').classList.add('active');
+    document.getElementById('username').value = '';
+  }
+</script>
+
+</body>
+</html>
