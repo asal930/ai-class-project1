@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>بازی وصل کردنی – درس ۹ عربی هشتم</title>
+  <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@700;900&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Vazirmatn', sans-serif;
+      background-color: #27ae60;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem;
+    }
+    header {
+      width: 100%;
+      max-width: 800px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      color: white;
+      font-size: 1.2rem;
+    }
+    .user-name {
+      font-weight: bold;
+      font-size: 1.4rem;
+    }
+    .timer {
+      font-size: 1.3rem;
+      font-weight: bold;
+      background: rgba(255,255,255,0.2);
+      padding: 0.3rem 0.8rem;
+      border-radius: 10px;
+    }
+    .timer.danger {
+      animation: shake 0.5s infinite;
+      background: #e74c3c;
+    }
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      75% { transform: translateX(-5px); }
+      100% { transform: translateX(0); }
+    }
+    .game-container {
+      width: 100%;
+      max-width: 800px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 1rem;
+    }
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 1rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      user-select: none;
+    }
+    .card.selected {
+      background: #f1c40f;
+      transform: scale(1.05);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+    }
+    .card.matched {
+      background: #27ae60;
+      color: white;
+      animation: pop 0.4s ease;
+    }
+    @keyframes pop {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+    .card.error {
+      background: #e74c3c;
+      color: white;
+      animation: shake 0.5s ease;
+    }
+    .card.correct {
+      background: #27ae60;
+      color: white;
+      animation: bounce 0.6s ease;
+    }
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+      40% {transform: translateY(-20px);}
+      60% {transform: translateY(-10px);}
+    }
+    .arabic {
+      font-family: 'Tajawal', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: #2c3e50;
+    }
+    .persian {
+      font-size: 1.2rem;
+      color: #2c3e50;
+    }
+    .persian span {
+      font-size: 1.5rem;
+      margin-right: 0.4rem;
+    }
+    .modal {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .modal-content {
+      background: white;
+      padding: 2rem;
+      border-radius: 16px;
+      text-align: center;
+      max-width: 90%;
+      width: 400px;
+    }
+    .modal h2 { margin-bottom: 1rem; color: #2c3e50; }
+    .modal input {
+      width: 100%;
+      padding: 0.8rem;
+      margin: 1rem 0;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      font-family: 'Vazirmatn', sans-serif;
+      font-size: 1.1rem;
+    }
+    .modal button {
+      background: #27ae60;
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 8px;
+      font-family: 'Vazirmatn', sans-serif;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .modal button:hover { background: #219150; }
+    .modal button.secondary {
+      background: #3498db;
+      margin-top: 0.5rem;
+    }
+    .modal button.secondary:hover { background: #2980b9; }
+    .hidden { display: none; }
+    .score-board {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1rem;
+      font-size: 1.2rem;
+      color: #2c3e50;
+    }
+    .score-board span {
+      font-weight: bold;
+    }
+    @media (max-width: 600px) {
+      .game-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .card {
+        padding: 0.8rem;
+      }
+      .arabic { font-size: 1.4rem; }
+      .persian { font-size: 1rem; }
+      .persian span { font-size: 1.3rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="user-name" id="header-name">کاربر</div>
+    <div class="timer" id="timer">200</div>
+  </header>
+
+  <div class="game-container" id="game-container">
+    <!-- کارت‌ها اینجا ساخته می‌شوند -->
+  </div>
+
+  <!-- مودال ورود نام -->
+  <div class="modal" id="login-modal">
+    <div class="modal-content">
+      <h2>ورود بازیکن</h2>
+      <p style="margin-bottom:1rem; color:#7f8c8d;">لطفاً نام خود را وارد کنید:</p>
+      <input type="text" id="username-input" placeholder="نام کاربری..." autocomplete="off">
+      <button id="start-btn">شروع بازی</button>
+      <p id="login-error" style="color:#e74c3c; margin-top:0.5rem; font-size:0.9rem; display:none;">لطفاً نام خود را وارد کنید!</p>
+    </div>
+  </div>
+
+  <!-- مودال پایان بازی -->
+  <div class="modal hidden" id="end-modal">
+    <div class="modal-content">
+      <h2 id="end-title">پایان بازی</h2>
+      <p id="end-message" style="margin:1rem 0; font-size:1.1rem;"></p>
+      <div class="score-board">
+        <span>امتیاز:</span>
+        <span id="final-score">0</span>
+      </div>
+      <div class="score-board">
+        <span>زمان باقی‌مانده:</span>
+        <span id="final-time">0</span>
+      </div>
+      <button id="restart-btn" class="secondary" style="margin-top:1.5rem;">بازی مجدد</button>
+    </div>
+  </div>
+
+  <script>
+    // داده‌های بازی
+    const wordPairs = [
+      { ar: 'فُرشاة', fa: 'مسواک', emoji: '🪥' },
+      { ar: 'مَعجون', fa: 'خَمیر', emoji: '🧈' },
+      { ar: 'أَسنان', fa: 'دندان‌ها', emoji: '🦷' },
+      { ar: 'ذِئب', fa: 'گرگ', emoji: '🐺' },
+      { ar: 'ذِئاب', fa: 'گرگ‌ها', emoji: '🐺🐺' },
+      { ar: 'فَطور', fa: 'صبحانه', emoji: '🍳' },
+      { ar: 'غَداء', fa: 'ناهار', emoji: '🍽️' },
+      { ar: 'عَشاء', fa: 'شام', emoji: '🌙' },
+      { ar: 'أَزهار', fa: 'گل‌ها، شکوفه‌ها', emoji: '🌸' },
+      { ar: 'مَلاعِب', fa: 'ورزشگاه‌ها', emoji: '⚽' }
+    ];
+
+    // متغیرهای بازی
+    let cards = [];
+    let selectedCard = null;
+    let matchedCount = 0;
+    let score = 0;
+    let timeLeft = 200;
+    let timerInterval;
+    let username = '';
+    let isGameActive = false;
+
+    // ایجاد صدا با Web Audio API
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function playSound(type) {
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      const osc = audioCtx.createOscillator();
+      const gainNode = audioCtx.createGain();
+      osc.connect(gainNode);
+      gainNode.connect(audioCtx.destination);
+
+      if (type === 'correct') {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5
+        osc.frequency.exponentialRampToValueAtTime(1046.5, audioCtx.currentTime + 0.1); // C6
+        gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.3);
+      } else if (type === 'wrong') {
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(150, audioCtx.currentTime);
+        osc.frequency.linearRampToValueAtTime(100, audioCtx.currentTime + 0.2);
+        gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.3);
+      } else if (type === 'win') {
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(523.25, audioCtx.currentTime);
+        osc.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.2);
+        osc.frequency.setValueAtTime(783.99, audioCtx.currentTime + 0.4);
+        gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime);
+        gainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 1);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 1);
+      } else if (type === 'lose') {
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(200, audioCtx.currentTime);
+        osc.frequency.linearRampToValueAtTime(100, audioCtx.currentTime + 0.5);
+        gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime);
+        gainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.8);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.8);
+      }
+    }
+
+    // تولید کارت‌ها
+    function createCards() {
+      const container = document.getElementById('game-container');
+      container.innerHTML = '';
+      cards = [];
+
+      wordPairs.forEach((pair, index) => {
+        // کارت عربی
+        const arabicCard = document.createElement('div');
+        arabicCard.className = 'card';
+        arabicCard.dataset.index = index;
+        arabicCard.dataset.type = 'arabic';
+        arabicCard.innerHTML = `<div class="arabic">${pair.ar}</div>`;
+        arabicCard.addEventListener('click', handleCardClick);
+        cards.push({ element: arabicCard, pairIndex: index, type: 'arabic' });
+
+        // کارت فارسی
+        const persianCard = document.createElement('div');
+        persianCard.className = 'card';
+        persianCard.dataset.index = index;
+        persianCard.dataset.type = 'persian';
+        persianCard.innerHTML = `<div class="persian"><span>${pair.emoji}</span>${pair.fa}</div>`;
+        persianCard.addEventListener('click', handleCardClick);
+        cards.push({ element: persianCard, pairIndex: index, type: 'persian' });
+      });
+
+      // مخلوط کردن کارت‌ها
+      cards.sort(() => Math.random() - 0.5);
+      cards.forEach(card => container.appendChild(card.element));
+    }
+
+    // مدیریت کلیک روی کارت
+    function handleCardClick(e) {
+      if (!isGameActive) return;
+      const clickedCard = e.currentTarget;
+      if (clickedCard.classList.contains('matched') || clickedCard.classList.contains('selected')) return;
+
+      clickedCard.classList.add('selected');
+
+      if (!selectedCard) {
+        selectedCard = clickedCard;
+      } else {
+        const firstCard = selectedCard;
+        const secondCard = clickedCard;
+
+        const firstIndex = firstCard.dataset.index;
+        const secondIndex = secondCard.dataset.index;
+
+        if (firstIndex === secondIndex) {
+          // جورچین صحیح
+          setTimeout(() => {
+            firstCard.classList.remove('selected');
+            secondCard.classList.remove('selected');
+            firstCard.classList.add('matched', 'correct');
+            secondCard.classList.add('matched', 'correct');
+            playSound('correct');
+            score += 10;
+            matchedCount++;
+            updateScore();
+            if (matchedCount === wordPairs.length) endGame(true);
+          }, 300);
+        } else {
+          // جورچین غلط
+          setTimeout(() => {
+            firstCard.classList.remove('selected');
+            secondCard.classList.remove('selected');
+            firstCard.classList.add('error');
+            secondCard.classList.add('error');
+            playSound('wrong');
+            score = Math.max(0, score - 2);
+            updateScore();
+            setTimeout(() => {
+              firstCard.classList.remove('error');
+              secondCard.classList.remove('error');
+            }, 500);
+          }, 300);
+        }
+        selectedCard = null;
+      }
+    }
+
+    // بروزرسانی امتیاز
+    function updateScore() {
+      document.getElementById('final-score').textContent = score;
+    }
+
+    // مدیریت تایمر
+    function startTimer() {
+      timerInterval = setInterval(() => {
+        timeLeft--;
+        document.getElementById('timer').textContent = timeLeft;
+
+        if (timeLeft <= 30) {
+          document.getElementById('timer').classList.add('danger');
+        }
+
+        if (timeLeft <= 0) {
+          endGame(false);
+        }
+      }, 1000);
+    }
+
+    // پایان بازی
+    function endGame(win) {
+      clearInterval(timerInterval);
+      isGameActive = false;
+      const modal = document.getElementById('end-modal');
+      const title = document.getElementById('end-title');
+      const message = document.getElementById('end-message');
+      const finalTime = document.getElementById('final-time');
+
+      modal.classList.remove('hidden');
+      finalTime.textContent = timeLeft;
+
+      if (win) {
+        title.textContent = 'تبریک! 🎉';
+        message.textContent = `شما بازی را با موفقیت تمام کردید، ${username}!`;
+        playSound('win');
+      } else {
+        title.textContent = 'متاسفانه شکست!';
+        message.textContent = `زمان تمام شد، ${username}.`;
+        playSound('lose');
+      }
+      document.getElementById('final-score').textContent = score;
+    }
+
+    // شروع بازی
+    function startGame() {
+      const input = document.getElementById('username-input');
+      const error = document.getElementById('login-error');
+      const modal = document.getElementById('login-modal');
+
+      if (!input.value.trim()) {
+        error.style.display = 'block';
+        input.focus();
+        return;
+      }
+
+      username = input.value.trim();
+      document.getElementById('header-name').textContent = username;
+      modal.classList.add('hidden');
+      error.style.display = 'none';
+
+      createCards();
+           score = 0;
+      matchedCount = 0;
+      timeLeft = 200;
+      document.getElementById('timer').textContent = timeLeft;
+      document.getElementById('timer').classList.remove('danger');
+      isGameActive = true;
+      startTimer();
+    }
+
+    // رویداد دکمه شروع
+    document.getElementById('start-btn').addEventListener('click', startGame);
+
+    // رویداد دکمه بازی مجدد
+    document.getElementById('restart-btn').addEventListener('click', () => {
+      document.getElementById('end-modal').classList.add('hidden');
+      document.getElementById('login-modal').classList.remove('hidden');
+      document.getElementById('username-input').value = '';
+      document.getElementById('login-error').style.display = 'none';
+    });
+
+    // پشتیبانی از Enter در ورودی نام
+    document.getElementById('username-input').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') startGame();
+    });
+
+    // اولین بار صفحه را آماده کن
+    document.getElementById('login-modal').classList.remove('hidden');
+  </script>
+</body>
+</html>
